@@ -89,4 +89,13 @@ function makeCounty(object) {
 }
 
 
+//---------------------------------------
+//  EVENT HANDLERS
+//---------------------------------------
+function sortName() {
+    const btn = document.getElementById('col-name');
+    btn.addEventListener('click', event => {
+        // sort stuff alpha by name
+    })
+}
 
