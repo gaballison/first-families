@@ -1,13 +1,23 @@
 table {
-    color: darkturquoise;
+    // color: dimgrey;
     font-size: 1.1em;
+    border-collapse: collapse;
 }
 
-tr {
+th {
     font-weight: bold;
-    color: rebeccapurple;
+    color: $blue;
+    text-align: left;
+    background-color: $citrine;
 }
 
-td {
-    padding: 1em;
+th, td {
+    padding: 0.5em 1em 0.5em 0.5em;
+    border: solid 1px $drab;
+    margin: 0;
+}
+
+.sort {
+    padding-left: 0.5em;
+    color: $turq;
 }

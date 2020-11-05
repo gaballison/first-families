@@ -342,41 +342,51 @@ template {
 /* BREAkPOINTS */
 body {
   margin: 0 auto;
+  padding: 0.5em;
   font-family: "Lora", serif;
   line-height: 1.9;
   font-size: 16px;
   font-weight: 400;
-  color: RGBA(105, 105, 105, 1);
+  color: RGBA(65, 54, 32, 1);
 }
 
 a {
   text-decoration: none;
-  color: RGBA(0, 206, 209, 1);
+  color: RGBA(188, 44, 26, 1);
 }
 
 a:hover {
-  color: rebeccapurple;
+  color: RGBA(17, 157, 164, 1);
 }
 
 h1, h2, h3, h4, h5 {
   font-family: "Lora", serif;
   font-weight: 600;
   line-height: 1.2;
-  color: RGBA(128, 128, 128, 1);
+  color: RGBA(3, 1, 44, 1);
 }
 
 table {
-  color: darkturquoise;
   font-size: 1.1em;
+  border-collapse: collapse;
 }
 
-tr {
+th {
   font-weight: bold;
-  color: rebeccapurple;
+  color: RGBA(3, 1, 44, 1);
+  text-align: left;
+  background-color: RGBA(218, 204, 62, 1);
 }
 
-td {
-  padding: 1em;
+th, td {
+  padding: 0.5em 1em 0.5em 0.5em;
+  border: solid 1px RGBA(65, 54, 32, 1);
+  margin: 0;
+}
+
+.sort {
+  padding-left: 0.5em;
+  color: RGBA(17, 157, 164, 1);
 }
 
 /*# sourceMappingURL=style.css.map */

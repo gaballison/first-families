@@ -2,14 +2,12 @@
 //  VARIABLES
 //---------------------------------------
 let html = document.getElementById('results');
-let testData = [];
 
 
 //---------------------------------------
 //  FETCH THE DATA
 //---------------------------------------
-fetch('./data/FFAncestorsThru2019.json')
-//   .then(response => response.json())
+fetch('./data/FFAncestors.json')
     .then(function(response) {
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -17,14 +15,12 @@ fetch('./data/FFAncestorsThru2019.json')
         return response.json();
     })
     .then(data => {
-        html.innerHTML += `<table><thead><tr><th>Name</th><th>County</th><th>First Year</th><th>Total Applicants</th></tr></thead><tbody>`;
+        
+        html.innerHTML += `<table id="main-table"><thead><tr><th>Name <i class="fas fa-sort fa-lg sort" id="col-name"></i></th><th id="col-county">County</th><th id="col-year">First Year</th><th id="col-apps">Total Applicants</th></tr></thead><tbody>`;
 
         data.forEach(obj => testTable(obj));
 
         html.innerHTML += `</tbody></table>`;
-
-        // makeTable(data);
-        // console.log(data);
 
   });
 
@@ -34,72 +30,48 @@ fetch('./data/FFAncestorsThru2019.json')
 //---------------------------------------
 
 function testTable(object) {
-    let row = `<tr>`;
+    let table = document.getElementById("main-table").getElementsByTagName("tbody")[0];
+    let newRow = table.insertRow();
 
     // construct name
-    row += `<td>${makeName(object)}</td>`;
+    let row = `<td>${makeName(object)}</td>`;
 
     // get county (or counties)
-    row+= `<td>${makeCounty(object)}</td>`
+    row += `<td>${makeCounty(object)}</td>`
 
     // print first year someone joined through that ancestor
-    row += `<td>${object['FIRST ADDED']}</td>`;
+    row += `<td>${object['first_added']}</td>`;
 
     // print total # of people who joined through that ancestor
-    row += `<td>${object['Total Applicants Using This Ancestor']}</td>`;
+    row += `<td>${object['total_applicants']}</td>`;
 
     row += `</tr>`;
-    console.log(`row = ${row}`);
-    html.innerHTML += row;
-}
-
-// this was the original function
-function makeTable(obj) {
-    html.innerHTML += dummy;
-    html.innerHTML += `<table><thead><tr><th>Name</th><th>County</th><th>First Year</th><th>Total Applicants</th></tr></thead><tbody>`;
-
-    for(const prop in obj) {
-        
-        html.innerHTML += `<tr>`;
-
-        // construct name
-        html.innerHTML += `<td>${makeName(obj[prop])}</td>`;
-
-        // get county (or counties)
-        html.innerHTML += `<td>${makeCounty(obj[prop])}</td>`
-
-        // print first year someone joined through that ancestor
-        html.innerHTML += `<td>${obj[prop]['FIRST ADDED']}</td>`;
-
-        // print total # of people who joined through that ancestor
-        html.innerHTML += `<td>${obj[prop]['Total Applicants Using This Ancestor']}</td>`;
-
-        html.innerHTML += `</tr>`;
-    }
-    html.innerHTML += `</tbody></table>`;
+    //console.log(`row = ${row}`);
+    
+    newRow.innerHTML = row;
 }
 
 function makeName(object) {
     // returns name as string formatted as LAST, Title First Middle (Maiden) Suffix
     // e.g. ARMSTRONG, Captain John Andrew II or HARRIS, Jane Elizabeth (Jones)
-    let fullName = `<strong>${object['Surname'].toUpperCase()}</strong>, `;
+    let fullName = `<strong>${object['surname'].toUpperCase()}</strong>, `;
 
-    if (object.Title) {
-        fullName += `${object['Title']} ${object['First Name']}`;
+    if (object['title']) {
+        fullName += `${object['title']} ${object['first_name']}`;
     } else {
-        fullName += `${object['First Name']}`;
+        fullName += `${object['first_name']}`;
     }
 
-    if (object['Middle Name']) {
-        fullName += ` ${object['Middle Name']}`;
+    if (object['middle_name']) {
+        fullName += ` ${object['middle_name']}`;
     }
 
-    if (object['Maiden Name']) {
-        fullName += ` (${object['Maiden Name']})`
+    if (object['maiden_name']) {
+        fullName += ` (${object['maiden_name']})`
     }
 
-    if (object.Suffix) {
-        fullName += ` ${object['Suffix']}`;
+    if (object['suffix']) {
+        fullName += ` ${object['suffix']}`;
     }
 
     return fullName;
@@ -107,10 +79,10 @@ function makeName(object) {
 
 // sometimes people listed an ancestor in 2 separate counties
 function makeCounty(object) {
-    let county = `${object['PRIMARY County']}`;
+    let county = `${object['primary_county']}`;
 
-    if(object['Secondary County']) {
-        county += `, ${object['Secondary County']}`;
+    if(object['secondary_county']) {
+        county += `, ${object['secondary_county']}`;
     }
 
     return county;

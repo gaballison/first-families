@@ -13,46 +13,16 @@ $line-height-headings: 1.2;
 // $leading: 1.6;
 
 /* COLORS */
-$purple: RGBA(102, 51, 153, 1); // rebeccapurple
-$purple-75: RGBA(102, 51, 153, .75); // 75% rebeccapurple
-$purple-50: RGBA(102, 51, 153, .5); // 50% rebeccapurple
-$purple-25: RGBA(102, 51, 153, .25); // 25% rebeccapurple
-
-$mdpurple: RGBA(147, 112, 219, 1); // mediumpurple
-$mdpurple-75: RGBA(147, 112, 219, .75); // 75% mediumpurple
-$mdpurple-50: RGBA(147, 112, 219, .5); // 50% mediumpurple
-$mdpurple-25: RGBA(147, 112, 219, .25); // 25% mediumpurple
-
-$ltgrey: RGBA(211, 211, 211, 1); // lightgray
-$ltgrey-75: RGBA(211, 211, 211, .75); // 75% lightgray
-$ltgrey-50: RGBA(211, 211, 211, .5); // 50% lightgray
-$ltgrey-25: RGBA(211, 211, 211, .25); // 25% lightgray
-
-$grey: RGBA(128, 128, 128, 1);  // gray
-$grey-75: RGBA(128, 128, 128, .75);  // 75% gray
-$grey-50: RGBA(128, 128, 128, .5);  // 50% gray
-$grey-25: RGBA(128, 128, 128, .25);  // 25% gray
-
-$dimgrey: RGBA(105, 105, 105, 1);  // dimgray
-$dimgrey-75: RGBA(105, 105, 105, .75);  // 75% dimgray
-$dimgrey-50: RGBA(105, 105, 105, .5);  // 50% dimgray
-$dimgrey-25: RGBA(105, 105, 105, .25);  // 25% dimgray
-
-$dkturq: RGBA(0, 206, 209, 1); // darkturquoise
-$dkturq-75: RGBA(0, 206, 209, .75); // 75% darkturquoise
-$dkturq-50: RGBA(0, 206, 209, .5); // 50% darkturquoise
-$dkturq-25: RGBA(0, 206, 209, .25); // 25% darkturquoise
-
-$turq: RGBA(64, 224, 208, 1);  // turquoise
-$turq-75: RGBA(64, 224, 208, .75);  // 75% turquoise
-$turq-50: RGBA(64, 224, 208, .50);  // 50% turquoise
-$turq-25: RGBA(64, 224, 208, .25);  // 25% turquoise
+$blue: RGBA(3,1,44,1); // oxfordblue
+$citrine: RGBA(218,204,62,1); // citrine
+$turq: RGBA(17,157,164,1); // viridian green?
+$drab: RGBA(65,54,32,1); // olive drab #7
+$red: RGBA(188,44,26,1);
 
 $white: RGBA(255, 255, 255, 1); // white
 $white-50: RGBA(255, 255, 255, .5); // white
 $black: RGBA(0, 0, 0, 1); // black
 
-$red: RGBA(233, 150, 122, 1);
 
 /* BREAkPOINTS */
 $breakpoint-xxs-max: 325px;

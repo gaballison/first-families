@@ -1,25 +1,26 @@
 body {
     margin: 0 auto;
+    padding: 0.5em;
     font-family: $font-stack-body;
     // font-weight: 500;
     line-height: $line-height-body;
     font-size: 16px;
     font-weight: 400;
-    color: $dimgrey;
+    color: $drab;
 }
 
 a {
     text-decoration: none;
-    color: $dkturq;
+    color: $red;
 }
 
 a:hover {
-    color: rebeccapurple;
+    color: $turq;
 }
 
 h1, h2, h3, h4, h5 {
     font-family: $font-stack-headings;
     font-weight: 600;
     line-height: $line-height-headings;
-    color: $grey;
+    color: $blue;
 }
