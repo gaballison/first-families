@@ -2,6 +2,9 @@
 //  VARIABLES
 //---------------------------------------
 let html = document.getElementById('results');
+const pagination = document.getElementById('pagination');
+let current_page = 1;
+let rows = 10;
 
 
 //---------------------------------------
@@ -16,7 +19,23 @@ fetch('./data/FFAncestors.json')
     })
     .then(data => {
         
-        html.innerHTML += `<table id="main-table"><thead><tr><th>Name <i class="fas fa-sort fa-lg sort" id="col-name"></i></th><th id="col-county">County</th><th id="col-year">First Year</th><th id="col-apps">Total Applicants</th></tr></thead><tbody>`;
+        html.innerHTML += `
+            <table id="main-table">
+                <thead>
+                    <tr>
+                        <th>Name <i class="fas fa-sort fa-lg sort" id="col-name"></i></th>
+                        <th>County <i class="fas fa-sort fa-lg sort" id="col-county"></i></th>
+                        <th>First Year <i class="fas fa-sort fa-lg sort" id="col-year"></i></th>
+                        <th>Total Applicants <i class="fas fa-sort fa-lg sort" id="col-apps"></i></th>
+                    </tr>
+                </thead>
+                <tbody>`;
+
+        // add click event handlers?!
+        let name = document.getElementById('col-name');
+        name.addEventListener('click', () => {
+            console.log(`You clicked the sorting tool that doesn't work yet!`)
+        });
 
         data.forEach(obj => testTable(obj));
 
@@ -98,4 +117,8 @@ function sortName() {
         // sort stuff alpha by name
     })
 }
+
+//---------------------------------------
+//  PAGINATION
+//---------------------------------------
 
