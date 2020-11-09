@@ -2,6 +2,9 @@
 //  VARIABLES
 //---------------------------------------
 let html = document.getElementById('results');
+let dataList = [];
+const viewYear = document.getElementById('view-year');
+const viewCounty = document.getElementById('view-county');
 
 
 //---------------------------------------
@@ -16,12 +19,29 @@ fetch('./data/FFAncestors.json')
     })
     .then(data => {
         
-        html.innerHTML += `<table id="main-table"><thead><tr><th>Name <i class="fas fa-sort fa-lg sort" id="col-name"></i></th><th id="col-county">County</th><th id="col-year">First Year</th><th id="col-apps">Total Applicants</th></tr></thead><tbody>`;
+        html.innerHTML += `
+            <table id="main-table">
+                <thead>
+                    <tr>
+                        <th id="col-name">Name <i class="fas fa-sort fa-lg sort"></i></th>
+                        <th id="col-county">County <i class="fas fa-sort fa-lg sort"></i></th>
+                        <th id="col-year">First Year <i class="fas fa-sort fa-lg sort"></i></th>
+                        <th id="col-apps">Total Applicants <i class="fas fa-sort fa-lg sort"></i></th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
 
-        data.forEach(obj => testTable(obj));
-
+        // display data initially
+        // TEST SORT
+        const sortedData = data.sort(SortSurnameAsc);
+        sortedData.forEach(obj => TestTable(obj));
+        //data.forEach(obj => testTable(obj));
+        
         html.innerHTML += `</tbody></table>`;
 
+        dataList = data;
+        
   });
 
 
@@ -29,15 +49,15 @@ fetch('./data/FFAncestors.json')
 //  HELPER FUNCTIONS
 //---------------------------------------
 
-function testTable(object) {
+function TestTable(object) {
     let table = document.getElementById("main-table").getElementsByTagName("tbody")[0];
     let newRow = table.insertRow();
 
     // construct name
-    let row = `<td>${makeName(object)}</td>`;
+    let row = `<td>${MakeName(object)}</td>`;
 
     // get county (or counties)
-    row += `<td>${makeCounty(object)}</td>`
+    row += `<td>${MakeCounty(object)}</td>`
 
     // print first year someone joined through that ancestor
     row += `<td>${object['first_added']}</td>`;
@@ -51,7 +71,7 @@ function testTable(object) {
     newRow.innerHTML = row;
 }
 
-function makeName(object) {
+function MakeName(object) {
     // returns name as string formatted as LAST, Title First Middle (Maiden) Suffix
     // e.g. ARMSTRONG, Captain John Andrew II or HARRIS, Jane Elizabeth (Jones)
     let fullName = `<strong>${object['surname'].toUpperCase()}</strong>, `;
@@ -78,7 +98,7 @@ function makeName(object) {
 }
 
 // sometimes people listed an ancestor in 2 separate counties
-function makeCounty(object) {
+function MakeCounty(object) {
     let county = `${object['primary_county']}`;
 
     if(object['secondary_county']) {
@@ -90,12 +110,33 @@ function makeCounty(object) {
 
 
 //---------------------------------------
-//  EVENT HANDLERS
+//  SORTING FUNCTIONS
 //---------------------------------------
-function sortName() {
-    const btn = document.getElementById('col-name');
-    btn.addEventListener('click', event => {
-        // sort stuff alpha by name
-    })
+
+function SortSurnameAsc(a, b) {
+    if ( a.surname < b.surname ){
+        return -1;
+    }
+    else if ( a.surname > b.surname ){
+        return 1;
+    }
+    return 0;
 }
 
+function SortFirstNameAsc(a, b) {
+    if ( a.first_name < b.first_name ){
+        return -1;
+    }
+    else if ( a.first_name > b.first_name ){
+        return 1;
+    }
+    return 0;
+}
+
+
+//---------------------------------------
+//  EVENT HANDLING
+//---------------------------------------
+viewCounty.addEventListener('click', () => {
+    document.getElementById("county-list").classList.toggle("show");
+})

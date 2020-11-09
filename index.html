@@ -19,22 +19,65 @@
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <h1>First Families of Floyd, Clark, and Harrison Counties</h1>
-        <div>
-            <form id="mainSearch">
-                <label for="genericSearch">Search for an ancestor</label>
-                <input type="text" name="genericSearch" id="genericSearch"/>
-            </form>
-        </div>
-        <p>This will be an interactive database of existing First Families ancestors. Hopefully someday an application portal, too, but that's beyond the scope of what I can do for this project.</p>
+        <nav id="top-nav">
+            <!-- <form action="" id="searchFilter"> -->
+            <ul id="nav-list">
+                <li><a href="#">Home</a></li>
+                <li><a href="#" id="view-year">View by Year</a>
+                    <ul id="year-list">
+                        <li><a href="#">2013</a></li>
+                        <li><a href="#">2014</a></li>
+                        <li><a href="#">2015</a></li>
+                        <li><a href="#">2016</a></li>
+                        <li><a href="#">2017</a></li>
+                        <li><a href="#">2018</a></li>
+                        <li><a href="#">2019</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" id="view-county">View by County</a>
+                    <ul id="county-list">
+                        <li><a href="#">Floyd</a></li>
+                        <li><a href="#">Clark</a></li>
+                        <li><a href="#">Harrison</a></li>
+                    </ul>
+                </li>
+                <!-- <li><select name="joinYear" id="joinYear">
+                    <option default>View by Application Year</option>
+                    <option>-----------------</option>
+                    <option value="2013">2013</option>
+                    <option value="2014">2014</option>
+                    <option value="2015">2015</option>
+                    <option value="2016">2016</option>
+                    <option value="2017">2017</option>
+                    <option value="2018">2018</option>
+                    <option value="2019">2019</option>
+                </select></li>
+                <li><select name="county" id="county">
+                    <option default>View by County</option>
+                    <option>-----------------</option>
+                    <option value="Floyd">Floyd</option>
+                    <option value="Clark">Clark</option>
+                    <option value="Harrison">Harrison</option>
+                </select></li> -->
+            </ul>
+        <!-- </form> -->
+        </nav>
+        <main>
+            <h1>First Families of Floyd, Clark, and Harrison Counties</h1>
+            <div>
+                <form id="mainSearch">
+                    <label for="genericSearch">Search for an ancestor</label>
+                    <input type="text" name="genericSearch" id="genericSearch"/>
+                </form>
+            </div>
+            <p>This will be an interactive database of existing <a href="http://sigsweb.org/firstfamilies">First Families ancestors</a>. Hopefully someday an application portal, too, but that's beyond the scope of what I can do for this project.</p>
 
-        <div>
-            Here will be a horizontal menu to filter or do more advanced searching
-        </div>
+            <h2>Existing Ancestors (through 2019)</h2>
+            <div id="results">
 
-        <div id="results">
-
-        </div>
+            </div>
+        </main>
+        
 
     
 

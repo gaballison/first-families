@@ -342,7 +342,6 @@ template {
 /* BREAkPOINTS */
 body {
   margin: 0 auto;
-  padding: 0.5em;
   font-family: "Lora", serif;
   line-height: 1.9;
   font-size: 16px;
@@ -363,7 +362,60 @@ h1, h2, h3, h4, h5 {
   font-family: "Lora", serif;
   font-weight: 600;
   line-height: 1.2;
-  color: RGBA(3, 1, 44, 1);
+  color: RGBA(17, 157, 164, 1);
+}
+
+main {
+  padding: 0.5em;
+}
+
+#top-nav {
+  background-color: RGBA(65, 54, 32, 1);
+  color: RGBA(218, 204, 62, 1);
+}
+
+#nav-list {
+  list-style-type: none;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-content: center;
+  align-items: center;
+  margin: 0;
+}
+#nav-list li {
+  list-style-type: none;
+  margin-right: 1em;
+  margin-left: 0;
+}
+#nav-list li a {
+  color: RGBA(255, 255, 255, 1);
+  display: block;
+  padding: 1em;
+}
+#nav-list li a:hover {
+  background-color: RGBA(218, 204, 62, 1);
+}
+
+#year-list, #county-list {
+  display: none;
+}
+#year-list li, #county-list li {
+  list-style-type: none;
+  margin-right: 1em;
+  margin-left: 0;
+}
+#year-list li a, #county-list li a {
+  color: RGBA(255, 255, 255, 1);
+  display: block;
+  padding: 1em;
+}
+#year-list li a:hover, #county-list li a:hover {
+  background-color: RGBA(218, 204, 62, 1);
+}
+
+.show {
+  display: block;
 }
 
 table {
@@ -386,7 +438,7 @@ th, td {
 
 .sort {
   padding-left: 0.5em;
-  color: RGBA(17, 157, 164, 1);
+  color: RGBA(3, 1, 44, 1);
 }
 
 /*# sourceMappingURL=style.css.map */

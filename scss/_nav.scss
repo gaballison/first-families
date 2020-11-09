@@ -1,0 +1,57 @@
+#top-nav {
+    
+    background-color: $drab;
+    color: $citrine;
+
+    
+}
+
+#nav-list {
+    list-style-type: none;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-content: center;
+    align-items: center;
+    margin: 0;
+
+    li {
+        list-style-type: none;
+        margin-right: 1em;
+        margin-left: 0;
+
+        a {
+            color: $white;
+            display: block;
+            padding: 1em;
+        }
+    
+        a:hover {
+            background-color: $citrine;
+        }
+    }
+}
+
+#year-list, #county-list {
+    display: none;
+
+    li {
+        list-style-type: none;
+        margin-right: 1em;
+        margin-left: 0;
+
+        a {
+            color: $white;
+            display: block;
+            padding: 1em;
+        }
+    
+        a:hover {
+            background-color: $citrine;
+        }
+    }
+}
+
+.show {
+    display: block;
+}
