@@ -7,6 +7,7 @@ const viewYear = document.getElementById('view-year');
 const viewCounty = document.getElementById('view-county');
 const pagination = document.getElementById('pagination');
 const navForm = document.getElementById('searchFilter');
+const mainSearch = document.getElementById('mainSearch');
 let resultsHeader = document.getElementById('resultsHeader');
 let current_page = 1;
 let rows = 10;
@@ -46,12 +47,86 @@ fetch('./data/FFAncestors.json')
         
         html.innerHTML += `</tbody></table>`;
 
+        // now that we've successfully returned the data, set it in a variable
         dataList = data;
         
 });
 
 
+
 function filterData(filter, value) {
+    html.innerHTML = `
+        <table id="main-table">
+            <thead>
+                <tr>
+                    <th>Name <i class="fad fa-sort-down fa-lg sort" id="col-name" onclick="ToSort('name')"></i></th>
+                    <th>County <i class="fas fa-sort fa-lg sort" id="col-county" onclick="ToSort('county')"></i></th>
+                    <th>First Year <i class="fas fa-sort fa-lg sort" id="col-year" onclick="ToSort('year')"></i></th>
+                    <th>Total Applicants <i class="fas fa-sort fa-lg sort" id="col-apps" onclick="ToSort('applicants')"></i></th>
+                </tr>
+            </thead>
+            <tbody>
+    `;
+
+    // return subset of data that only matches specified filter
+    let filteredData = [];
+
+    if (filter === 'county') {
+        // match on primary_county or secondary_county
+        filteredData = dataList.filter( obj => obj.primary_county === value || obj.secondary_county === value);
+        resultsHeader.innerHTML = `Showing ${filteredData.length} results in ${value} County`;
+    } else if (filter === 'year') {
+        // match on application year
+        // console.log(`Value is ${value} which is type ${typeof value}`)
+        filteredData = dataList.filter( obj => obj.first_added === parseInt(value));
+        resultsHeader.innerHTML = `Showing ${filteredData.length} results in ${value}`;
+    }
+
+    
+    const sortedData = filteredData.sort(SortSurnameAsc);
+    sortedData.forEach(obj => TestTable(obj));
+    
+    html.innerHTML += `</tbody></table>`;
+}
+
+function sortData(filter, value, sortMethod) {
+    
+    html.innerHTML = `
+        <table id="main-table">
+            <thead>
+                <tr>
+                    <th>Name <i class="fad fa-sort-down fa-lg sort" id="col-name" onclick="ToSort('name')"></i></th>
+                    <th>County <i class="fas fa-sort fa-lg sort" id="col-county" onclick="ToSort('county')"></i></th>
+                    <th>First Year <i class="fas fa-sort fa-lg sort" id="col-year" onclick="ToSort('year')"></i></th>
+                    <th>Total Applicants <i class="fas fa-sort fa-lg sort" id="col-apps" onclick="ToSort('applicants')"></i></th>
+                </tr>
+            </thead>
+            <tbody>
+    `;
+
+    // return subset of data that only matches specified filter
+    let filteredData = [];
+
+    if (filter === 'county') {
+        // match on primary_county or secondary_county
+        filteredData = dataList.filter( obj => obj.primary_county === value || obj.secondary_county === value);
+        resultsHeader.innerHTML = `Showing ${filteredData.length} results in ${value} County`;
+    } else if (filter === 'year') {
+        // match on application year
+        // console.log(`Value is ${value} which is type ${typeof value}`)
+        filteredData = dataList.filter( obj => obj.first_added === parseInt(value));
+        resultsHeader.innerHTML = `Showing ${filteredData.length} results in ${value}`;
+    }
+
+    
+    const sortedData = filteredData.sort(SortSurnameAsc);
+    sortedData.forEach(obj => TestTable(obj));
+    
+    html.innerHTML += `</tbody></table>`;
+        
+}
+
+function SearchData(name) {
     fetch('./data/FFAncestors.json')
     .then(function(response) {
         if (!response.ok) {
@@ -74,75 +149,28 @@ function filterData(filter, value) {
                 <tbody>
         `;
 
-        // return subset of data that only matches specified filter
-        let filteredData = [];
+        // display data initially
+        // TEST SORT
+        resultsHeader.innerHTML = `Showing all ${data.length} results for ${name}`;
 
-        if (filter === 'county') {
-            // match on primary_county or secondary_county
-            filteredData = data.filter( obj => obj.primary_county === value || obj.secondary_county === value);
-            resultsHeader.innerHTML = `Showing ${filteredData.length} results in ${value} County`;
-        } else if (filter === 'year') {
-            // match on application year
-            // console.log(`Value is ${value} which is type ${typeof value}`)
-            filteredData = data.filter( obj => obj.first_added === parseInt(value));
-            resultsHeader.innerHTML = `Showing ${filteredData.length} results in ${value}`;
-        }
+        // search for a name
+        const words = name.split(" ");
+        let filteredNames = [];
+        words.forEach(word => {
 
+        });
+        const filteredData = data.filter( obj => obj.first_name === value || obj.secondary_county === value);
         
-        const sortedData = filteredData.sort(SortSurnameAsc);
+
+
+        const sortedData = data.sort(SortSurnameAsc);
         sortedData.forEach(obj => TestTable(obj));
+        //data.forEach(obj => testTable(obj));
         
         html.innerHTML += `</tbody></table>`;
         
-  });
+    });
 }
-
-function sortData(filter, value) {
-    fetch('./data/FFAncestors.json')
-    .then(function(response) {
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json();
-    })
-    .then(data => {
-        
-        html.innerHTML = `
-            <table id="main-table">
-                <thead>
-                    <tr>
-                        <th>Name <i class="fad fa-sort-down fa-lg sort" id="col-name" onclick="ToSort('name')"></i></th>
-                        <th>County <i class="fas fa-sort fa-lg sort" id="col-county" onclick="ToSort('county')"></i></th>
-                        <th>First Year <i class="fas fa-sort fa-lg sort" id="col-year" onclick="ToSort('year')"></i></th>
-                        <th>Total Applicants <i class="fas fa-sort fa-lg sort" id="col-apps" onclick="ToSort('applicants')"></i></th>
-                    </tr>
-                </thead>
-                <tbody>
-        `;
-
-        // return subset of data that only matches specified filter
-        let filteredData = [];
-
-        if (filter === 'county') {
-            // match on primary_county or secondary_county
-            filteredData = data.filter( obj => obj.primary_county === value || obj.secondary_county === value);
-            resultsHeader.innerHTML = `Showing ${filteredData.length} results in ${value} County`;
-        } else if (filter === 'year') {
-            // match on application year
-            // console.log(`Value is ${value} which is type ${typeof value}`)
-            filteredData = data.filter( obj => obj.first_added === parseInt(value));
-            resultsHeader.innerHTML = `Showing ${filteredData.length} results in ${value}`;
-        }
-
-        
-        const sortedData = filteredData.sort(SortSurnameAsc);
-        sortedData.forEach(obj => TestTable(obj));
-        
-        html.innerHTML += `</tbody></table>`;
-        
-  });
-}
-
 
 //---------------------------------------
 //  HELPER FUNCTIONS
@@ -232,6 +260,16 @@ function SortFirstNameAsc(a, b) {
     return 0;
 }
 
+function SortApps(a, b) {
+    if ( a.first_added < b.first_added ){
+        return -1;
+    }
+    else if ( a.first_added > b.first_added ){
+        return 1;
+    }
+    return 0;
+}
+
 //---------------------------------------
 //  EVENT HANDLING
 //---------------------------------------
@@ -242,6 +280,10 @@ function SortFirstNameAsc(a, b) {
 
 function ToSort(what) {
     console.log(`You clicked on ${what}`);
+    if (what === 'applicants') {
+
+    }
+
 }
 
 navForm.addEventListener('change', event => {
@@ -249,12 +291,18 @@ navForm.addEventListener('change', event => {
     // then we fetch the data matching that criteria and build a table with the results
     if (event.target.id === 'county') {
         filterData('county', event.target.value);
+        event.target.id.selectedIndex = null;
     } else if (event.target.id === 'joinYear') {
         filterData('year', event.target.value);
+        event.target.id.selectedIndex = null;
     }
-    event.target.id.selectedIndex = null;
-    
+});
 
+mainSearch.addEventListener('submit', event => {
+    event.preventDefault();
+    const searchTerm = document.getElementById('genericSearch').value;
+    console.log(`You want to search for ${searchTerm}`);
+    
 });
 
 

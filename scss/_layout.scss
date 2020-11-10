@@ -1,3 +1,26 @@
+#mainSearch {
+    margin: 0 auto;
+    text-align: center;
+    //background-color: $lavender;
+    padding: 1em;
+    
+    input {
+        padding: 1em;
+        background-color: $muted;
+        border: solid 2px $primary;
+        border-radius: 5px;
+        font-size: 1.2em;
+    }
+
+    label {
+        display: block;
+        font-family: $font-stack-headings;
+        font-size: 1.2em;
+        font-weight: 500;
+        color: $primary;
+    }
+}
+
 table {
     // color: dimgrey;
     font-size: 1.1em;
@@ -6,26 +29,27 @@ table {
 
 th {
     font-weight: bold;
-    color: $antiquewhite;
+    color: $text;
     text-align: left;
-    background-color: $shadow;
+    background-color: $table;
+    font-family: $font-stack-headings;
 }
 
 th, td {
     padding: 0.5em 1em 0.5em 0.5em;
-    border: solid 1px $shadow;
+    border: solid 1px $table;
     margin: 0;
 }
 
 .sort {
     padding-left: 0.5em;
-    color: $emerald;
+    color: $bg;
 }
 
 .sort:hover {
-    color: $antiquewhite;
+    color: $linkhover;
 }
 
 .sort:active {
-    color: $black;
+    color: $text;
 }

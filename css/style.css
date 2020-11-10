@@ -347,22 +347,24 @@ body {
   font-size: 16px;
   font-weight: 400;
   color: RGBA(32, 30, 31, 1);
+  background-color: RGBA(254, 239, 221, 1);
 }
 
 a {
   text-decoration: none;
-  color: RGBA(51, 202, 127, 1);
+  color: RGBA(34, 87, 122, 1);
+  font-weight: 600;
 }
 
 a:hover {
-  color: RGBA(135, 123, 102, 1);
+  color: RGBA(164, 80, 139, 1);
 }
 
 h1, h2, h3, h4, h5 {
-  font-family: "Lora", serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 600;
   line-height: 1.2;
-  color: RGBA(66, 122, 161, 1);
+  color: RGBA(255, 159, 28, 1);
 }
 
 main {
@@ -371,10 +373,11 @@ main {
 
 #top-nav {
   overflow: hidden;
-  background-color: RGBA(51, 202, 127, 1);
+  background-color: RGBA(46, 196, 182, 1);
   color: RGBA(32, 30, 31, 1);
   font-size: 1.2em;
   font-weight: 600;
+  font-family: "Montserrat", sans-serif;
 }
 
 #nav-list {
@@ -397,7 +400,7 @@ main {
   padding: 1em;
 }
 #nav-list li a:hover {
-  background-color: RGBA(66, 122, 161, 1);
+  color: RGBA(255, 159, 28, 1);
 }
 
 #year-list, #county-list {
@@ -414,19 +417,39 @@ main {
   padding: 1em;
 }
 #year-list li a:hover, #county-list li a:hover {
-  background-color: RGBA(66, 122, 161, 1);
+  background-color: RGBA(255, 159, 28, 1);
 }
 
 #searchFilter select {
   font-weight: 600;
   padding: 1em;
-  background-color: RGBA(51, 202, 127, 1);
+  background-color: RGBA(46, 196, 182, 1);
   border: 0;
   color: RGBA(254, 239, 221, 1);
 }
 
 .show {
   display: inherit;
+}
+
+#mainSearch {
+  margin: 0 auto;
+  text-align: center;
+  padding: 1em;
+}
+#mainSearch input {
+  padding: 1em;
+  background-color: RGBA(220, 220, 220, 1);
+  border: solid 2px RGBA(46, 196, 182, 1);
+  border-radius: 5px;
+  font-size: 1.2em;
+}
+#mainSearch label {
+  display: block;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.2em;
+  font-weight: 500;
+  color: RGBA(46, 196, 182, 1);
 }
 
 table {
@@ -436,28 +459,29 @@ table {
 
 th {
   font-weight: bold;
-  color: RGBA(254, 239, 221, 1);
+  color: RGBA(32, 30, 31, 1);
   text-align: left;
-  background-color: RGBA(135, 123, 102, 1);
+  background-color: RGBA(220, 220, 220, 1);
+  font-family: "Montserrat", sans-serif;
 }
 
 th, td {
   padding: 0.5em 1em 0.5em 0.5em;
-  border: solid 1px RGBA(135, 123, 102, 1);
+  border: solid 1px RGBA(220, 220, 220, 1);
   margin: 0;
 }
 
 .sort {
   padding-left: 0.5em;
-  color: RGBA(51, 202, 127, 1);
-}
-
-.sort:hover {
   color: RGBA(254, 239, 221, 1);
 }
 
+.sort:hover {
+  color: RGBA(164, 80, 139, 1);
+}
+
 .sort:active {
-  color: RGBA(0, 0, 0, 1);
+  color: RGBA(32, 30, 31, 1);
 }
 
 /*# sourceMappingURL=style.css.map */

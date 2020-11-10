@@ -1,9 +1,10 @@
 #top-nav {
     overflow: hidden;
-    background-color: $emerald;
-    color: $eerieblack; 
+    background-color: $primary;
+    color: $text; 
     font-size: 1.2em;
-    font-weight: 600;   
+    font-weight: 600;  
+    font-family: $font-stack-headings; 
 }
 
 #nav-list {
@@ -27,7 +28,7 @@
         }
     
         a:hover {
-            background-color: $steelblue;
+            color: $secondary;
         }
     }
 }
@@ -47,7 +48,7 @@
         }
     
         a:hover {
-            background-color: $steelblue;
+            background-color: $secondary;
         }
     }
 }
@@ -56,9 +57,9 @@
     select {
         font-weight: 600;
         padding: 1em;
-        background-color: $emerald;
+        background-color: $primary;
         border: 0;
-        color: $antiquewhite;
+        color: $bg;
     }
 }
 

@@ -5,23 +5,25 @@ body {
     line-height: $line-height-body;
     font-size: 16px;
     font-weight: 400;
-    color: $eerieblack;
+    color: $text;
+    background-color: $bg;
 }
 
 a {
     text-decoration: none;
-    color: $emerald;
+    color: $link;
+    font-weight: 600;
 }
 
 a:hover {
-    color: $shadow;
+    color: $linkhover;
 }
 
 h1, h2, h3, h4, h5 {
     font-family: $font-stack-headings;
     font-weight: 600;
     line-height: $line-height-headings;
-    color: $steelblue;
+    color: $secondary;
 }
 
 main {
