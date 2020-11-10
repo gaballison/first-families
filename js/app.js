@@ -6,6 +6,8 @@ let dataList = [];
 const viewYear = document.getElementById('view-year');
 const viewCounty = document.getElementById('view-county');
 const pagination = document.getElementById('pagination');
+const navForm = document.getElementById('searchFilter');
+let resultsHeader = document.getElementById('resultsHeader');
 let current_page = 1;
 let rows = 10;
 
@@ -22,14 +24,14 @@ fetch('./data/FFAncestors.json')
     })
     .then(data => {
         
-        html.innerHTML += `
+        html.innerHTML = `
             <table id="main-table">
                 <thead>
                     <tr>
-                        <th id="col-name">Name <i class="fas fa-sort fa-lg sort"></i></th>
-                        <th id="col-county">County <i class="fas fa-sort fa-lg sort"></i></th>
-                        <th id="col-year">First Year <i class="fas fa-sort fa-lg sort"></i></th>
-                        <th id="col-apps">Total Applicants <i class="fas fa-sort fa-lg sort"></i></th>
+                        <th>Name <i class="fad fa-sort-down fa-lg sort" id="col-name" onclick="ToSort('name')"></i></th>
+                        <th>County <i class="fas fa-sort fa-lg sort" id="col-county" onclick="ToSort('county')"></i></th>
+                        <th>First Year <i class="fas fa-sort fa-lg sort" id="col-year" onclick="ToSort('year')"></i></th>
+                        <th>Total Applicants <i class="fas fa-sort fa-lg sort" id="col-apps" onclick="ToSort('applicants')"></i></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,6 +39,7 @@ fetch('./data/FFAncestors.json')
 
         // display data initially
         // TEST SORT
+        resultsHeader.innerHTML = `Showing all ${data.length} approved ancestors`;
         const sortedData = data.sort(SortSurnameAsc);
         sortedData.forEach(obj => TestTable(obj));
         //data.forEach(obj => testTable(obj));
@@ -45,7 +48,100 @@ fetch('./data/FFAncestors.json')
 
         dataList = data;
         
+});
+
+
+function filterData(filter, value) {
+    fetch('./data/FFAncestors.json')
+    .then(function(response) {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        
+        html.innerHTML = `
+            <table id="main-table">
+                <thead>
+                    <tr>
+                        <th>Name <i class="fad fa-sort-down fa-lg sort" id="col-name" onclick="ToSort('name')"></i></th>
+                        <th>County <i class="fas fa-sort fa-lg sort" id="col-county" onclick="ToSort('county')"></i></th>
+                        <th>First Year <i class="fas fa-sort fa-lg sort" id="col-year" onclick="ToSort('year')"></i></th>
+                        <th>Total Applicants <i class="fas fa-sort fa-lg sort" id="col-apps" onclick="ToSort('applicants')"></i></th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
+
+        // return subset of data that only matches specified filter
+        let filteredData = [];
+
+        if (filter === 'county') {
+            // match on primary_county or secondary_county
+            filteredData = data.filter( obj => obj.primary_county === value || obj.secondary_county === value);
+            resultsHeader.innerHTML = `Showing ${filteredData.length} results in ${value} County`;
+        } else if (filter === 'year') {
+            // match on application year
+            // console.log(`Value is ${value} which is type ${typeof value}`)
+            filteredData = data.filter( obj => obj.first_added === parseInt(value));
+            resultsHeader.innerHTML = `Showing ${filteredData.length} results in ${value}`;
+        }
+
+        
+        const sortedData = filteredData.sort(SortSurnameAsc);
+        sortedData.forEach(obj => TestTable(obj));
+        
+        html.innerHTML += `</tbody></table>`;
+        
   });
+}
+
+function sortData(filter, value) {
+    fetch('./data/FFAncestors.json')
+    .then(function(response) {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        
+        html.innerHTML = `
+            <table id="main-table">
+                <thead>
+                    <tr>
+                        <th>Name <i class="fad fa-sort-down fa-lg sort" id="col-name" onclick="ToSort('name')"></i></th>
+                        <th>County <i class="fas fa-sort fa-lg sort" id="col-county" onclick="ToSort('county')"></i></th>
+                        <th>First Year <i class="fas fa-sort fa-lg sort" id="col-year" onclick="ToSort('year')"></i></th>
+                        <th>Total Applicants <i class="fas fa-sort fa-lg sort" id="col-apps" onclick="ToSort('applicants')"></i></th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
+
+        // return subset of data that only matches specified filter
+        let filteredData = [];
+
+        if (filter === 'county') {
+            // match on primary_county or secondary_county
+            filteredData = data.filter( obj => obj.primary_county === value || obj.secondary_county === value);
+            resultsHeader.innerHTML = `Showing ${filteredData.length} results in ${value} County`;
+        } else if (filter === 'year') {
+            // match on application year
+            // console.log(`Value is ${value} which is type ${typeof value}`)
+            filteredData = data.filter( obj => obj.first_added === parseInt(value));
+            resultsHeader.innerHTML = `Showing ${filteredData.length} results in ${value}`;
+        }
+
+        
+        const sortedData = filteredData.sort(SortSurnameAsc);
+        sortedData.forEach(obj => TestTable(obj));
+        
+        html.innerHTML += `</tbody></table>`;
+        
+  });
+}
 
 
 //---------------------------------------
@@ -136,13 +232,31 @@ function SortFirstNameAsc(a, b) {
     return 0;
 }
 
-
 //---------------------------------------
 //  EVENT HANDLING
 //---------------------------------------
-viewCounty.addEventListener('click', () => {
-    document.getElementById("county-list").classList.toggle("show");
-})
+// viewCounty.addEventListener('click', () => {
+//     document.getElementById("county-list").classList.toggle("show");
+//     console.log(`You clicked the County button, but it's not working...`)
+// });
+
+function ToSort(what) {
+    console.log(`You clicked on ${what}`);
+}
+
+navForm.addEventListener('change', event => {
+    console.log(`You changed ${event.target.id} to ${event.target.value}!`);
+    // then we fetch the data matching that criteria and build a table with the results
+    if (event.target.id === 'county') {
+        filterData('county', event.target.value);
+    } else if (event.target.id === 'joinYear') {
+        filterData('year', event.target.value);
+    }
+    event.target.id.selectedIndex = null;
+    
+
+});
+
 
 
 //---------------------------------------
@@ -196,7 +310,7 @@ function PaginationButton (page, items) {
 	return button;
 }
 
-DisplayList(list_items, list_element, rows, current_page);
-SetupPagination(list_items, pagination_element, rows);
+// DisplayList(list_items, list_element, rows, current_page);
+// SetupPagination(list_items, pagination_element, rows);
 
 // source: https://github.com/TylerPottsDev/vanillajs-pagination/blob/master/main.js

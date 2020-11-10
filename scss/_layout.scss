@@ -6,18 +6,26 @@ table {
 
 th {
     font-weight: bold;
-    color: $blue;
+    color: $antiquewhite;
     text-align: left;
-    background-color: $citrine;
+    background-color: $shadow;
 }
 
 th, td {
     padding: 0.5em 1em 0.5em 0.5em;
-    border: solid 1px $drab;
+    border: solid 1px $shadow;
     margin: 0;
 }
 
 .sort {
     padding-left: 0.5em;
-    color: $blue;
+    color: $emerald;
+}
+
+.sort:hover {
+    color: $antiquewhite;
+}
+
+.sort:active {
+    color: $black;
 }

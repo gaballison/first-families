@@ -1,9 +1,9 @@
 #top-nav {
-    
-    background-color: $drab;
-    color: $citrine;
-
-    
+    overflow: hidden;
+    background-color: $emerald;
+    color: $eerieblack; 
+    font-size: 1.2em;
+    font-weight: 600;   
 }
 
 #nav-list {
@@ -27,7 +27,7 @@
         }
     
         a:hover {
-            background-color: $citrine;
+            background-color: $steelblue;
         }
     }
 }
@@ -47,11 +47,21 @@
         }
     
         a:hover {
-            background-color: $citrine;
+            background-color: $steelblue;
         }
     }
 }
 
+#searchFilter {
+    select {
+        font-weight: 600;
+        padding: 1em;
+        background-color: $emerald;
+        border: 0;
+        color: $antiquewhite;
+    }
+}
+
 .show {
-    display: block;
+    display: inherit;
 }
