@@ -32,7 +32,8 @@ fetch('./data/FFAncestors.json')
         return response.json();
     })
     .then(data => {
-        
+
+        // Start building the table
         html.innerHTML = `
             <table id="main-table">
                 <thead>
@@ -46,12 +47,14 @@ fetch('./data/FFAncestors.json')
                 <tbody>
         `;
 
-        // display data initially
-        // TEST SORT
+        // Build the header to show how many results in total
         resultsHeader.innerHTML = `Showing all ${data.length} approved ancestors`;
+
+        // Sort the data alphabetically by surname
         const sortedData = data.sort(SortSurnameAsc);
         sortedData.forEach(obj => TestTable(obj));
         
+        // Close out the table
         html.innerHTML += `</tbody></table>`;
 
         // now that we've successfully returned the data, set it in a variable
