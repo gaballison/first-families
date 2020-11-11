@@ -82,7 +82,7 @@ function filterData(filter, value) {
         // filteredData = dataList.filter( obj => obj.first_added === parseInt(value));
         
         filteredData = dataList.filter( obj => obj[value] > 0);
-        resultsHeader.innerHTML = `Showing ${filteredData.length} results in ${value}`;
+        resultsHeader.innerHTML = `Showing the ${filteredData.length} ancestors from the ${value} cohort`;
     }
 
     
