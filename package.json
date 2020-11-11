@@ -1,0 +1,29 @@
+{
+  "name": "first-families",
+  "version": "0.0.1",
+  "description": "Web app to view data on existing First Families of Floyd, Clark, and Harrison Counties applications",
+  "main": "js/app.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gaballison/first-families.git"
+  },
+  "keywords": [
+    "genealogy"
+  ],
+  "author": "Allison Fredrickson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gaballison/first-families/issues"
+  },
+  "homepage": "https://github.com/gaballison/first-families#readme",
+  "dependencies": {
+    "colors": "^1.4.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.2.1"
+  }
+}
