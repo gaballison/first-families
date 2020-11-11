@@ -16,6 +16,8 @@ let rows = 10;
 //---------------------------------------
 //  FETCH THE DATA
 //---------------------------------------
+
+// initial fetch of entire data
 fetch('./data/FFAncestors.json')
     .then(function(response) {
         if (!response.ok) {
@@ -43,7 +45,6 @@ fetch('./data/FFAncestors.json')
         resultsHeader.innerHTML = `Showing all ${data.length} approved ancestors`;
         const sortedData = data.sort(SortSurnameAsc);
         sortedData.forEach(obj => TestTable(obj));
-        //data.forEach(obj => testTable(obj));
         
         html.innerHTML += `</tbody></table>`;
 
@@ -53,7 +54,7 @@ fetch('./data/FFAncestors.json')
 });
 
 
-
+// filtering data
 function filterData(filter, value) {
     html.innerHTML = `
         <table id="main-table">
@@ -78,7 +79,9 @@ function filterData(filter, value) {
     } else if (filter === 'year') {
         // match on application year
         // console.log(`Value is ${value} which is type ${typeof value}`)
-        filteredData = dataList.filter( obj => obj.first_added === parseInt(value));
+        // filteredData = dataList.filter( obj => obj.first_added === parseInt(value));
+        
+        filteredData = dataList.filter( obj => obj[value] > 0);
         resultsHeader.innerHTML = `Showing ${filteredData.length} results in ${value}`;
     }
 
@@ -136,6 +139,7 @@ function SearchData(name) {
     })
     .then(data => {
         
+        // Start building the table
         html.innerHTML = `
             <table id="main-table">
                 <thead>
@@ -149,24 +153,55 @@ function SearchData(name) {
                 <tbody>
         `;
 
-        // display data initially
-        // TEST SORT
-        resultsHeader.innerHTML = `Showing all ${data.length} results for ${name}`;
-
-        // search for a name
+        // Split the input into individual words
         const words = name.split(" ");
-        let filteredNames = [];
-        words.forEach(word => {
+        const wLength = words.length;
+        const surname = words[wLength-1].toUpperCase();
+        let searchNames = [];
 
-        });
-        const filteredData = data.filter( obj => obj.first_name === value || obj.secondary_county === value);
-        
+        // Loop through the initial data array
+        for (let i = 0; i < data.length; i++) {
+            const ancestor = data[i];
 
+            // If they entered more than 1 search term, divvy it up to search by surname first
+            if (wLength > 1) {
 
-        const sortedData = data.sort(SortSurnameAsc);
+                if ( ancestor.surname.toUpperCase().includes(surname) || ancestor.maiden_name.toUpperCase().includes(surname) ) {
+                    console.log(`Yay, we have a surname match for ${surname}`);
+
+                    const shortArray = words.slice(0,(wLength-1));
+                    console.log(`The new short array is ${shortArray}`);
+
+                    shortArray.forEach(word => {
+                        if (ancestor.first_name.toUpperCase().includes(word.toUpperCase()) || ancestor.middle_name.toUpperCase().includes(word.toUpperCase())) {
+                            console.log(`We have a match in the short array for ${word}`);
+
+                            searchNames.push(ancestor);
+                        }
+                    });
+                }
+            // otherwise search multiple fields for instances of that single term
+            } else {
+                
+                if(ancestor.first_name.toUpperCase().includes(name.toUpperCase()) || ancestor.middle_name.toUpperCase().includes(name.toUpperCase()) || ancestor.maiden_name.toUpperCase().includes(name.toUpperCase()) || ancestor.surname.toUpperCase().includes(name.toUpperCase())) {
+                    
+                    searchNames.push(ancestor);
+                }
+
+            }
+            
+        }
+
+        // Make sure we don't have any duplicates in the array
+        const uniqueAncestors = searchNames.filter((v,i,a)=>a.findIndex(t=>(t.ancestor_id === v.ancestor_id))===i);
+
+        // Update header to show number of results + search term
+        resultsHeader.innerHTML = `Showing all ${uniqueAncestors.length} results for ${name}`;
+
+        // Sort the array alphabetically and then print it
+        const sortedData = uniqueAncestors.sort(SortSurnameAsc);
         sortedData.forEach(obj => TestTable(obj));
-        //data.forEach(obj => testTable(obj));
-        
+
         html.innerHTML += `</tbody></table>`;
         
     });
@@ -302,7 +337,7 @@ mainSearch.addEventListener('submit', event => {
     event.preventDefault();
     const searchTerm = document.getElementById('genericSearch').value;
     console.log(`You want to search for ${searchTerm}`);
-    
+    SearchData(searchTerm);
 });
 
 

@@ -25,19 +25,20 @@ table {
     // color: dimgrey;
     font-size: 1.1em;
     border-collapse: collapse;
+    background-color: $grey-3;
 }
 
 th {
     font-weight: bold;
     color: $text;
     text-align: left;
-    background-color: $table;
+    background-color: $grey-2;
     font-family: $font-stack-headings;
 }
 
 th, td {
     padding: 0.5em 1em 0.5em 0.5em;
-    border: solid 1px $table;
+    border: solid 1px $grey-2;
     margin: 0;
 }
 

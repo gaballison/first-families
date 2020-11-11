@@ -1,3 +1,4 @@
+@use "sass:color";
 
 /* TYPOGRAPHY */
 $font-stack-headings: 'Montserrat', sans-serif;
@@ -12,39 +13,28 @@ $line-height-headings: 1.2;
 // );
 // $leading: 1.6;
 
-/* COLORS */
-$bg: RGBA(254,239,221,1);
-$primary: RGBA(46,196,182,1);
-$primary-muted: RGBA(203,243,240,1);
-$secondary: RGBA(255,159,28,1);
-$secondary-muted: RGBA(255,191,105,1);
-$text: RGBA(32,30,31,1);
+/* DARK MODE COLORS */
+$black: RGBA(0, 0, 0, 1); // black
+$bg: #212529;
+$grey-1: #343A40;
+$grey-2: #495057;
+$grey-3: #6C757D;
+$grey-4: #ADB5BD;
+$grey-5: #CED4DA;
+$grey-6: #DEE2E6;
+$grey-7: #E9ECEF;
+$grey-8: #F8F9FA;
+$white: RGBA(255, 255, 255, 1); // white
+
+$primary: #40E0D0;
+$primary-muted: color.scale($primary, $lightness: 30%);
+$secondary: #E55812;
+$secondary-muted: color.scale($secondary, $lightness: 30%);
+$text: $grey-8;
 $link: RGBA(34,87,122,1);
 $linkhover: RGBA(164,80,139,1);
 $muted: RGBA(220, 220, 220,1);
 $table: RGBA(220, 220, 220,1);
-
-// $blue: RGBA(3,1,44,1); // oxfordblue
-// $citrine: RGBA(218,204,62,1); // citrine
-// $turq: RGBA(17,157,164,1); // viridian green?
-// $drab: RGBA(65,54,32,1); // olive drab #7
-// $red: RGBA(188,44,26,1);
-
-
-// $shadow: RGBA(135,123,102,1);
-// $steelblue: RGBA(66,122,161,1);
-// $emerald: RGBA(51,202,127,1);
-
-
-// $jazzberry: RGBA(175,18,90,1);
-// $fblue: RGBA(0,229,232,1);
-// $lavender: RGBA(189,139,156,1);
-
-
-
-$white: RGBA(255, 255, 255, 1); // white
-$white-50: RGBA(255, 255, 255, .5); // white
-$black: RGBA(0, 0, 0, 1); // black
 
 
 /* BREAkPOINTS */

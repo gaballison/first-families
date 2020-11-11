@@ -338,7 +338,7 @@ template {
 }
 
 /* TYPOGRAPHY */
-/* COLORS */
+/* DARK MODE COLORS */
 /* BREAkPOINTS */
 body {
   margin: 0 auto;
@@ -346,8 +346,8 @@ body {
   line-height: 1.9;
   font-size: 16px;
   font-weight: 400;
-  color: RGBA(32, 30, 31, 1);
-  background-color: RGBA(254, 239, 221, 1);
+  color: #F8F9FA;
+  background-color: #212529;
 }
 
 a {
@@ -364,7 +364,7 @@ h1, h2, h3, h4, h5 {
   font-family: "Montserrat", sans-serif;
   font-weight: 600;
   line-height: 1.2;
-  color: RGBA(255, 159, 28, 1);
+  color: #E55812;
 }
 
 main {
@@ -373,8 +373,8 @@ main {
 
 #top-nav {
   overflow: hidden;
-  background-color: RGBA(46, 196, 182, 1);
-  color: RGBA(32, 30, 31, 1);
+  background-color: #40E0D0;
+  color: #F8F9FA;
   font-size: 1.2em;
   font-weight: 600;
   font-family: "Montserrat", sans-serif;
@@ -400,7 +400,7 @@ main {
   padding: 1em;
 }
 #nav-list li a:hover {
-  color: RGBA(255, 159, 28, 1);
+  color: #E55812;
 }
 
 #year-list, #county-list {
@@ -417,15 +417,15 @@ main {
   padding: 1em;
 }
 #year-list li a:hover, #county-list li a:hover {
-  background-color: RGBA(255, 159, 28, 1);
+  background-color: #E55812;
 }
 
 #searchFilter select {
   font-weight: 600;
   padding: 1em;
-  background-color: RGBA(46, 196, 182, 1);
+  background-color: #40E0D0;
   border: 0;
-  color: RGBA(254, 239, 221, 1);
+  color: #212529;
 }
 
 .show {
@@ -440,7 +440,7 @@ main {
 #mainSearch input {
   padding: 1em;
   background-color: RGBA(220, 220, 220, 1);
-  border: solid 2px RGBA(46, 196, 182, 1);
+  border: solid 2px #40E0D0;
   border-radius: 5px;
   font-size: 1.2em;
 }
@@ -449,31 +449,32 @@ main {
   font-family: "Montserrat", sans-serif;
   font-size: 1.2em;
   font-weight: 500;
-  color: RGBA(46, 196, 182, 1);
+  color: #40E0D0;
 }
 
 table {
   font-size: 1.1em;
   border-collapse: collapse;
+  background-color: #6C757D;
 }
 
 th {
   font-weight: bold;
-  color: RGBA(32, 30, 31, 1);
+  color: #F8F9FA;
   text-align: left;
-  background-color: RGBA(220, 220, 220, 1);
+  background-color: #495057;
   font-family: "Montserrat", sans-serif;
 }
 
 th, td {
   padding: 0.5em 1em 0.5em 0.5em;
-  border: solid 1px RGBA(220, 220, 220, 1);
+  border: solid 1px #495057;
   margin: 0;
 }
 
 .sort {
   padding-left: 0.5em;
-  color: RGBA(254, 239, 221, 1);
+  color: #212529;
 }
 
 .sort:hover {
@@ -481,7 +482,7 @@ th, td {
 }
 
 .sort:active {
-  color: RGBA(32, 30, 31, 1);
+  color: #F8F9FA;
 }
 
 /*# sourceMappingURL=style.css.map */
