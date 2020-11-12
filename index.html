@@ -10,10 +10,13 @@
         <title>First Families Database</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- CSS -->
         <link rel="stylesheet" href="css/style.css">
         <link href="https://fonts.googleapis.com/css2?family=Lora&family=Montserrat:wght@500&display=swap" rel="stylesheet">
-        <!-- Place your kit's code here -->
+        
+        <!-- VENDOR SCRIPTS -->
         <script src="https://kit.fontawesome.com/70ab692f33.js" crossorigin="anonymous"></script>
+        <script src="https://d3js.org/d3.v6.min.js"></script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -71,6 +74,11 @@
                 </form>
             </div>
             <p>This will be an interactive database of existing <a href="http://sigsweb.org/firstfamilies">First Families ancestors</a>. Hopefully someday an application portal, too, but that's beyond the scope of what I can do for this project.</p>
+            <hr/>
+            <h2>Basic Stats</h2>
+            <div id="datavis">
+                
+            </div>
 
             <h2 id="resultsHeader"></h2>
             <div id="results">
@@ -80,8 +88,6 @@
 
             </div>
         </main>       
-
-    
 
         <script src="js/app.js"></script>
     </body>
