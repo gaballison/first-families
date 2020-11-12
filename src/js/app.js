@@ -1,7 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     //---------------------------------------
-    //  VARIABLES
+    //  MODULES
+    //---------------------------------------
+    //import * as d3 from "d3.mjs";
+    //const d3 = require('d3');
+
+
+    //---------------------------------------
+    //  GLOBAL VARIABLES
     //---------------------------------------
     let html = document.getElementById('results');
     let dataList = [];
@@ -13,7 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const pagination = document.getElementById('pagination');
     const navForm = document.getElementById('searchFilter');
     const mainSearch = document.getElementById('mainSearch');
-    
 
 
     //---------------------------------------
@@ -29,43 +35,21 @@ document.addEventListener('DOMContentLoaded', () => {
             return response.json();
         })
         .then(data => {
+
+            // Build the table of initial data
             buildTable(data);
             dataList = data;
-            getData();
 
-            d3.select("#datavis");
-        //     let chart = {
-        //         const svg = d3.create("svg")
-        //             .attr("viewBox", [0, 0, width, height]);
-              
-        //         svg.append("g")
-        //           .selectAll("g")
-        //           .data(series)
-        //           .join("g")
-        //             .attr("fill", d => color(d.key))
-        //           .selectAll("rect")
-        //           .data(d => d)
-        //           .join("rect")
-        //             .attr("x", (d, i) => x(d.data.name))
-        //             .attr("y", d => y(d[1]))
-        //             .attr("height", d => y(d[0]) - y(d[1]))
-        //             .attr("width", x.bandwidth())
-        //           .append("title")
-        //             .text(d => `${d.data.name} ${d.key}
-        //       ${formatValue(d.data[d.key])}`);
-              
-        //         svg.append("g")
-        //             .call(xAxis);
-              
-        //         svg.append("g")
-        //             .call(yAxis);
-              
-        //         return svg.node();
-        //       }
+            // Generate the data for visualizations
+            // getData();
+
+            
+
+
         });
 
     
-    function fetchData() {
+    function fetchData(dataFunction) {
         fetch('./data/FFAncestors.json')
         .then(function(response) {
             if (!response.ok) {
@@ -73,9 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             return response.json();
         })
-        .then(data => {
-            dataList = data;
-        });
+        .then(data => dataFunction(data));
         
     }
 
@@ -341,6 +323,46 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         });
+
+        // Start the actual visualization
+        const dataVis = d3.select("#datavis");
+        makeChart(statList);
+
+    }
+
+    function makeChart(data) {
+
+        // Create an empty (detached) chart container.
+        const div = d3.create("div");
+        
+        // Apply some styles to the chart container.
+        div.style("font", "10px sans-serif");
+        div.style("text-align", "right");
+        div.style("color", "white");
+        
+        // Define the initial (empty) selection for the bars.
+        const bar = div.selectAll("div");
+        
+        // Bind this selection to the data (computing enter, update and exit).
+        const barUpdate = bar.data(data);
+        
+        // Join the selection and the data, appending the entering bars.
+        const barNew = barUpdate.join("div");
+        
+        // Apply some styles to the bars.
+        barNew.style("background", "steelblue");
+        barNew.style("padding", "3px");
+        barNew.style("margin", "1px");
+        
+        // Set the width as a function of data.
+        barNew.style("width", d => `${d * 10}px`);
+        
+        // Set the text of each bar as the data.
+        barNew.text(d => d);
+        
+        // Return the chart container.
+        return div.node();
+
     }
 
 

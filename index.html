@@ -16,7 +16,7 @@
         
         <!-- VENDOR SCRIPTS -->
         <script src="https://kit.fontawesome.com/70ab692f33.js" crossorigin="anonymous"></script>
-        <script src="https://d3js.org/d3.v6.min.js"></script>
+        <script type="module" src="https://d3js.org/d3.v6.min.js"></script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -26,24 +26,6 @@
             <form action="" id="searchFilter">
             <ul id="nav-list">
                 <li><a href=".">View All</a></li>
-                <!-- <li><a href="#" id="view-year">View by Year</a>
-                    <ul id="year-list">
-                        <li><a href="#">2013</a></li>
-                        <li><a href="#">2014</a></li>
-                        <li><a href="#">2015</a></li>
-                        <li><a href="#">2016</a></li>
-                        <li><a href="#">2017</a></li>
-                        <li><a href="#">2018</a></li>
-                        <li><a href="#">2019</a></li>
-                    </ul>
-                </li>
-                <li><a href="#" id="view-county">View by County</a>
-                    <ul id="county-list">
-                        <li><a href="#">Floyd</a></li>
-                        <li><a href="#">Clark</a></li>
-                        <li><a href="#">Harrison</a></li>
-                    </ul>
-                </li> -->
                 <li><select name="joinYear" id="joinYear">
                     <option default>View by Year</option>
                     <option disabled>-----------------</option>
@@ -89,6 +71,6 @@
             </div>
         </main>       
 
-        <script src="js/app.js"></script>
+        <script src="js/bundle.js"></script>
     </body>
 </html>
