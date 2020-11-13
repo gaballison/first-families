@@ -29,14 +29,15 @@ $white: RGBA(255, 255, 255, 1); // white
 $primary: #52489C ;
 $primary-muted: color.scale($primary, $lightness: 30%);
 $secondary: #59C3C3;
-$secondary-muted: color.scale($secondary, $lightness: 30%);
+$secondary-muted: color.scale($secondary, $lightness: 60%);
 $tertiary: #ED4D6E;
 $ternary: #DB6C79;
 $text: $grey-2;
 $link: $tertiary;
 $linkhover: $ternary;
 $muted: #EBEBEB;
-$th: color.scale($bg, $blackness: 30%);
+$th: color.scale($bg, $blackness: 40%);
+$zebra: color.scale($bg, $blackness: 10%);
 
 
 /* BREAkPOINTS */

@@ -44,35 +44,35 @@
                         <option value="Clark">Clark</option>
                         <option value="Harrison">Harrison</option>
                     </select></li>
-                    <li>Application Deadline: <span id="countdown"></span></li>
                 </ul>
             </form>
         </nav>
-        <main>
-            <h1>First Families of Floyd, Clark, and Harrison Counties</h1>
+        <header>
+            <div>
+                <h1>First Families</h1>
+                <h2 class="subtitle">of Floyd, Clark, &amp; Harrison Counties</h2>
+            </div>
             <div>
                 <form id="mainSearch">
                     <label for="genericSearch">Search for a specific ancestor</label>
                     <input type="text" name="genericSearch" id="genericSearch"/>
                 </form>
             </div>
+        </header>
+        <main>
             <p>This will be an interactive database of existing <a href="http://sigsweb.org/firstfamilies">First Families ancestors</a>. Hopefully someday an application portal, too, but that's beyond the scope of what I can do for this project.</p>
             
-            <div id="stats">
-                
-            </div>
-
-           
+            <div id="statsDiv"></div>
 
             <h2 id="resultsHeader"></h2>
-            <div id="results">
+            <div id="results"></div>
+            <div id="pagination"></div>
+        </main>   
+        <footer><ul>
+            <li>&copy; <a href="https://allison.codes">Allison Fredrickson</a> <span id="copyright"></span></li>
+            <li>Application Deadline: <span id="countdown"></span></li>
+        </ul></footer>    
 
-            </div>
-            <div id="pagination">
-
-            </div>
-        </main>       
-
-        <script src="js/bundle.js"></script>
+        <script src="src/js/app.js"></script>
     </body>
 </html>

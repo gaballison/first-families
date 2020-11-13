@@ -13,8 +13,18 @@ document.addEventListener('DOMContentLoaded', () => {
     let html = document.getElementById('results');
     let dataList = [];
     let resultsHeader = document.getElementById('resultsHeader');
+    let statsDiv = document.getElementById('statsDiv');
     let current_page = 1;
     let rows = 10;
+    let yearTotals = [ ];
+    let yearObj = {};
+    let countyTotals =  {
+        'Total': 0,
+        'Floyd': 0,
+        'Clark': 0,
+        'Harrison': 0
+    }
+    const counties = ['Floyd', 'Clark', 'Harrison'];
     const viewYear = document.getElementById('view-year');
     const viewCounty = document.getElementById('view-county');
     const pagination = document.getElementById('pagination');
@@ -42,9 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Generate the data for visualizations
             getData();
-
-            
-
+            makeStatsDiv();
 
         });
 
@@ -63,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // filtering data
     function filterData(filter, value) {
-        fetchData();
+        //fetchData();
         beginTable();
 
         // return subset of data that only matches specified filter
@@ -72,10 +80,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (filter === 'county') {
             // match on primary_county or secondary_county
             filteredData = dataList.filter( obj => obj.primary_county === value || obj.secondary_county === value);
-            resultsHeader.innerHTML = `Showing ${filteredData.length} results in ${value} County`;
+            resultsHeader.innerHTML = `Showing <span class="highlight">${filteredData.length}</span> results in <span class="highlight">${value}</span> County`;
+            makeStatsDiv(value);
         } else if (filter === 'year') {
             filteredData = dataList.filter( obj => obj[value] > 0);
-            resultsHeader.innerHTML = `Showing the ${filteredData.length} ancestors from the ${value} cohort`;
+            resultsHeader.innerHTML = `Showing the <span class="highlight">${filteredData.length}</span> ancestors from the <span class="highlight">${value}</span> cohort`;
+            makeStatsDiv(parseInt(value));
         }
 
         const sortedData = filteredData.sort(sortSurnameAsc);
@@ -185,14 +195,18 @@ document.addEventListener('DOMContentLoaded', () => {
         <table id="main-table">
             <thead>
                 <tr>
-                    <th>Name <i class="fad fa-sort-down fa-lg sort" id="col-name" onclick="toSort('name')"></i></th>
-                    <th>County <i class="fas fa-sort fa-lg sort" id="col-county" onclick="toSort('county')"></i></th>
-                    <th>First Year <i class="fas fa-sort fa-lg sort" id="col-year" onclick="toSort('year')"></i></th>
-                    <th>Applicants <i class="fas fa-sort fa-lg sort" id="col-apps" onclick="toSort('applicants')"></i></th>
+                    <th>Name</th>
+                    <th>County</th>
+                    <th>First Year</th>
+                    <th>Applicants</th>
                 </tr>
             </thead>
             <tbody>
         `;
+        // <th>Name <i class="fad fa-sort-down fa-lg sort" id="col-name" onclick="toSort('name')"></i></th>
+        //             <th>County <i class="fas fa-sort fa-lg sort" id="col-county" onclick="toSort('county')"></i></th>
+        //             <th>First Year <i class="fas fa-sort fa-lg sort" id="col-year" onclick="toSort('year')"></i></th>
+        //             <th>Applicants <i class="fas fa-sort fa-lg sort" id="col-apps" onclick="toSort('applicants')"></i></th>
     }
 
     function buildTable(data) {
@@ -248,7 +262,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (object['maiden_name']) {
-            fullName += ` (${object['maiden_name']})`
+            fullName += ` <em>(${object['maiden_name']})</em>`
         }
 
         if (object['suffix']) {
@@ -278,28 +292,42 @@ document.addEventListener('DOMContentLoaded', () => {
         // fetchData();
 
         // Create new object for each year 2013-2019 
-        let statList = [ ];
+        
         for (let i = 2013; i < 2020; i++) {
-            statList.push({ 'year': i, 'new_floyd': 0, 'new_clark': 0, 'new_harrison': 0, 'existing_floyd': 0, 'existing_clark': 0, 'existing_harrison': 0 });
+            yearTotals.push({ 'year': i, 'new_floyd': 0, 'new_clark': 0, 'new_harrison': 0, 'existing_floyd': 0, 'existing_clark': 0, 'existing_harrison': 0 });
+
+            yearObj[i] = { 'total': 0, 'total_new': 0, 'total_existing': 0,'new_floyd': 0, 'new_clark': 0, 'new_harrison': 0, 'existing_floyd': 0, 'existing_clark': 0, 'existing_harrison': 0 };
+
         }
-        //console.dir(statList);
+        // console.dir(yearTotals);
+        // console.dir(yearObj);
 
-        statList.forEach(item => { 
-            const year = item['year'];
-
+        for (const year in yearObj) {
             dataList.forEach(person => {
                 if (person[year] > 0) {
                     if (person.first_added === parseInt(year)) {
                         // console.log(`${person.first_name} ${person.surname} first added in ${year}`);
                         switch(person.primary_county) {
                             case 'Floyd':
-                                item.new_floyd++;
+                                yearObj[year].new_floyd++;
+                                yearObj[year].total++;
+                                yearObj[year].total_new++;
+                                countyTotals.Floyd++;
+                                countyTotals.Total++;
                                 break;
                             case 'Clark':
-                                item.new_clark++;
+                                yearObj[year].new_clark++;
+                                yearObj[year].total++;
+                                yearObj[year].total_new++;
+                                countyTotals.Clark++;
+                                countyTotals.Total++;
                                 break;
                             case 'Harrison':
-                                item.new_harrison++;
+                                yearObj[year].new_harrison++;
+                                yearObj[year].total++;
+                                yearObj[year].total_new++;
+                                countyTotals.Harrison++;
+                                countyTotals.Total++;
                                 break;
                             default:
                                 break;
@@ -308,13 +336,19 @@ document.addEventListener('DOMContentLoaded', () => {
                         // console.log(`${person.first_name} ${person.surname} was used in ${year} but was first added in ${person.first_added}`);
                         switch(person.primary_county) {
                             case 'Floyd':
-                                item.existing_floyd++;
+                                yearObj[year].existing_floyd++;
+                                yearObj[year].total++;
+                                yearObj[year].total_existing++;
                                 break;
                             case 'Clark':
-                                item.existing_clark++;
+                                yearObj[year].existing_clark++;
+                                yearObj[year].total++;
+                                yearObj[year].total_existing++;
                                 break;
                             case 'Harrison':
-                                item.existing_harrison++;
+                                yearObj[year].existing_harrison++;
+                                yearObj[year].total++;
+                                yearObj[year].total_existing++;
                                 break;
                             default:
                                 break;
@@ -322,12 +356,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
             });
-        });
-
-        // Start the actual visualization
-        //const dataVis = d3.select("#datavis");
-       // makeChart(statList);
-
+        }
+        
     }
 
     function makeChart(data) {
@@ -364,7 +394,62 @@ document.addEventListener('DOMContentLoaded', () => {
         return div.node();
 
     }
-    
+
+    function makeStatsDiv(year, county) {
+
+        year = parseInt(year);
+        statsDiv.innerHTML = '';        
+
+        if (year !== undefined && year < 2020 && year > 2012) {
+            console.log(`Year is ${year} (type ${typeof year}) so we can fetch all of the data from the object at yearObj[year]: ${yearObj[year]}`);
+            let data = yearObj[year];
+            let dummy = `
+                    <div class="stat stat-year">
+                        <h2>${year}</h2>
+                        <span><strong>${data.total_new}</strong> total new</span>
+                        <span><strong>${data.total_existing}</strong> total existing</span>
+                    </div>
+                `;
+            dummy += `
+                <div class="stat stat-year">
+                    <h2>Floyd</h2>
+                    <span><strong>${data.new_floyd}</strong> new</span>
+                    <span><strong>${data.existing_floyd}</strong> existing</span>
+                </div>
+            `;
+            dummy += `
+                <div class="stat stat-year">
+                    <h2>Clark</h2>
+                    <span><strong>${data.new_clark}</strong> new</span>
+                    <span><strong>${data.existing_clark}</strong> existing</span>
+                </div>
+            `;
+            dummy += `
+                <div class="stat stat-year">
+                    <h2>Harrison</h2>
+                    <span><strong>${data.new_harrison}</strong> new</span>
+                    <span><strong>${data.existing_harrison}</strong> existing</span>
+                </div>
+            `;
+            statsDiv.innerHTML += dummy;
+        } else if (county === 'Floyd') {
+
+        }
+        else {
+            // count number that contain/include each county
+            
+            for (const key in countyTotals) {
+                let dummy = `
+                    <div class="stat">
+                        <h2>${countyTotals[key]}</h2>
+                        <span>${key}</span>
+                    </div>
+                `;
+                statsDiv.innerHTML += dummy;
+            }
+        }
+    }
+
 
     //---------------------------------------
     //  COUNTDOWN CLOCK
@@ -403,12 +488,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 1000);
 
    
-
-
     //---------------------------------------
     //  SORTING FUNCTIONS
     //---------------------------------------
-
     function sortSurnameAsc(a, b) {
         if ( a.surname < b.surname ){
             return -1;
@@ -419,36 +501,10 @@ document.addEventListener('DOMContentLoaded', () => {
         return 0;
     }
 
-    function sortFirstNameAsc(a, b) {
-        if ( a.first_name < b.first_name ){
-            return -1;
-        }
-        else if ( a.first_name > b.first_name ){
-            return 1;
-        }
-        return 0;
-    }
-
-    function sortApps(a, b) {
-        if ( a.first_added < b.first_added ){
-            return -1;
-        }
-        else if ( a.first_added > b.first_added ){
-            return 1;
-        }
-        return 0;
-    }
 
     //---------------------------------------
     //  EVENT HANDLING
     //---------------------------------------
-    function toSort(what) {
-        console.log(`You clicked on ${what}`);
-        if (what === 'applicants') {
-
-        }
-    }
-
     navForm.addEventListener('change', event => {
         console.log(`You changed ${event.target.id} to ${event.target.value}!`);
         // then we fetch the data matching that criteria and build a table with the results
