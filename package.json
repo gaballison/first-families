@@ -24,7 +24,9 @@
     "sass": "^1.29.0"
   },
   "devDependencies": {
+    "browser-sync": "^2.26.13",
     "chai": "^4.2.0",
+    "gulp": "^4.0.2",
     "mocha": "^8.2.1"
   }
 }
