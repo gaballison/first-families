@@ -1,17 +1,18 @@
-#top-nav {
+#main-nav {
     overflow: hidden;
-    background-color: $primary;
-    color: $text; 
+    background-color: $th;
+    color: $muted; 
     font-size: 1.2em;
     font-weight: 600;  
     font-family: $font-stack-headings; 
+    margin-bottom: 1em;
 }
 
 #nav-list {
     list-style-type: none;
     display: flex;
     flex-flow: row wrap;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-content: center;
     align-items: center;
     margin: 0;
@@ -22,44 +23,28 @@
         margin-left: 0;
 
         a {
-            color: $white;
+            color: $primary;
             display: block;
             padding: 1em;
         }
     
         a:hover {
-            color: $secondary;
+            color: $tertiary;
         }
     }
 }
 
-#year-list, #county-list {
-    display: none;
-
-    li {
-        list-style-type: none;
-        margin-right: 1em;
-        margin-left: 0;
-
-        a {
-            color: $white;
-            display: block;
-            padding: 1em;
-        }
-    
-        a:hover {
-            background-color: $secondary;
-        }
-    }
+#countdown {
+    color: $ternary;
 }
 
 #searchFilter {
     select {
         font-weight: 600;
         padding: 1em;
-        background-color: $primary;
+        background-color: $th;
         border: 0;
-        color: $bg;
+        color: $primary;
     }
 }
 

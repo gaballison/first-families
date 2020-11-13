@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
             dataList = data;
 
             // Generate the data for visualizations
-            // getData();
+            getData();
 
             
 
@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const uniqueAncestors = searchNames.filter((v,i,a)=>a.findIndex(t=>(t.ancestor_id === v.ancestor_id))===i);
 
         // Update header to show number of results + search term
-        resultsHeader.innerHTML = `Showing all ${uniqueAncestors.length} results for ${name}`;
+        resultsHeader.innerHTML = `Showing all <span class='highlight'>${uniqueAncestors.length}</span> results for ${name}`;
 
         // Sort the array alphabetically and then print it
         const sortedData = uniqueAncestors.sort(sortSurnameAsc);
@@ -188,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <th>Name <i class="fad fa-sort-down fa-lg sort" id="col-name" onclick="toSort('name')"></i></th>
                     <th>County <i class="fas fa-sort fa-lg sort" id="col-county" onclick="toSort('county')"></i></th>
                     <th>First Year <i class="fas fa-sort fa-lg sort" id="col-year" onclick="toSort('year')"></i></th>
-                    <th>Total Applicants <i class="fas fa-sort fa-lg sort" id="col-apps" onclick="toSort('applicants')"></i></th>
+                    <th>Applicants <i class="fas fa-sort fa-lg sort" id="col-apps" onclick="toSort('applicants')"></i></th>
                 </tr>
             </thead>
             <tbody>
@@ -200,7 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
         beginTable();
 
         // Build the header to show how many results in total
-        resultsHeader.innerHTML = `Showing all ${data.length} approved ancestors`;
+        resultsHeader.innerHTML = `Showing all <span class='highlight'>${data.length}</span> approved ancestors`;
 
         // Sort the data alphabetically by surname
         const sortedData = data.sort(sortSurnameAsc);
@@ -325,8 +325,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // Start the actual visualization
-        const dataVis = d3.select("#datavis");
-        makeChart(statList);
+        //const dataVis = d3.select("#datavis");
+       // makeChart(statList);
 
     }
 
@@ -364,6 +364,45 @@ document.addEventListener('DOMContentLoaded', () => {
         return div.node();
 
     }
+    
+
+    //---------------------------------------
+    //  COUNTDOWN CLOCK
+    //---------------------------------------
+
+    // Set the date we're counting down to
+    const cdDate = new Date("Aug 15, 2021 12:00:00");
+    const countDownDate = cdDate.getTime();
+
+
+    // Update the count down every 1 second
+    const x = setInterval(function() {
+
+        // Get today's date and time
+        const now = new Date().getTime();
+
+        // Find the distance between now and the count down date
+        const distance = countDownDate - now;
+
+        // Time calculations for days, hours, minutes and seconds
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Display the result in the element with id="demo"
+        document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
+        + minutes + "m " + seconds + "s ";
+        document.getElementById("countdown").setAttribute('title', cdDate);
+
+        // If the count down is finished, write some text
+        if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("countdown").innerHTML += "PASSED!";
+        }
+    }, 1000);
+
+   
 
 
     //---------------------------------------

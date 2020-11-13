@@ -15,7 +15,7 @@ $line-height-headings: 1.2;
 
 /* DARK MODE COLORS */
 $black: RGBA(0, 0, 0, 1); // black
-$bg: #212529;
+$bg: #CAD2C5;
 $grey-1: #343A40;
 $grey-2: #495057;
 $grey-3: #6C757D;
@@ -26,15 +26,17 @@ $grey-7: #E9ECEF;
 $grey-8: #F8F9FA;
 $white: RGBA(255, 255, 255, 1); // white
 
-$primary: #40E0D0;
+$primary: #52489C ;
 $primary-muted: color.scale($primary, $lightness: 30%);
-$secondary: #E55812;
+$secondary: #59C3C3;
 $secondary-muted: color.scale($secondary, $lightness: 30%);
-$text: $grey-8;
-$link: RGBA(34,87,122,1);
-$linkhover: RGBA(164,80,139,1);
-$muted: RGBA(220, 220, 220,1);
-$table: RGBA(220, 220, 220,1);
+$tertiary: #ED4D6E;
+$ternary: #DB6C79;
+$text: $grey-2;
+$link: $tertiary;
+$linkhover: $ternary;
+$muted: #EBEBEB;
+$th: color.scale($bg, $blackness: 30%);
 
 
 /* BREAkPOINTS */

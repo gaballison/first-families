@@ -46,34 +46,6 @@
 
                 
 
-            //     let chart = {
-            //         const svg = d3.create("svg")
-            //             .attr("viewBox", [0, 0, width, height]);
-                  
-            //         svg.append("g")
-            //           .selectAll("g")
-            //           .data(series)
-            //           .join("g")
-            //             .attr("fill", d => color(d.key))
-            //           .selectAll("rect")
-            //           .data(d => d)
-            //           .join("rect")
-            //             .attr("x", (d, i) => x(d.data.name))
-            //             .attr("y", d => y(d[1]))
-            //             .attr("height", d => y(d[0]) - y(d[1]))
-            //             .attr("width", x.bandwidth())
-            //           .append("title")
-            //             .text(d => `${d.data.name} ${d.key}
-            //       ${formatValue(d.data[d.key])}`);
-                  
-            //         svg.append("g")
-            //             .call(xAxis);
-                  
-            //         svg.append("g")
-            //             .call(yAxis);
-                  
-            //         return svg.node();
-            //       }
 
             });
 
@@ -168,7 +140,7 @@
             const uniqueAncestors = searchNames.filter((v,i,a)=>a.findIndex(t=>(t.ancestor_id === v.ancestor_id))===i);
 
             // Update header to show number of results + search term
-            resultsHeader.innerHTML = `Showing all ${uniqueAncestors.length} results for ${name}`;
+            resultsHeader.innerHTML = `Showing all <span class='highlight'>${uniqueAncestors.length}</span> results for ${name}`;
 
             // Sort the array alphabetically and then print it
             const sortedData = uniqueAncestors.sort(sortSurnameAsc);
@@ -191,7 +163,7 @@
                     <th>Name <i class="fad fa-sort-down fa-lg sort" id="col-name" onclick="toSort('name')"></i></th>
                     <th>County <i class="fas fa-sort fa-lg sort" id="col-county" onclick="toSort('county')"></i></th>
                     <th>First Year <i class="fas fa-sort fa-lg sort" id="col-year" onclick="toSort('year')"></i></th>
-                    <th>Total Applicants <i class="fas fa-sort fa-lg sort" id="col-apps" onclick="toSort('applicants')"></i></th>
+                    <th>Applicants <i class="fas fa-sort fa-lg sort" id="col-apps" onclick="toSort('applicants')"></i></th>
                 </tr>
             </thead>
             <tbody>
@@ -203,7 +175,7 @@
             beginTable();
 
             // Build the header to show how many results in total
-            resultsHeader.innerHTML = `Showing all ${data.length} approved ancestors`;
+            resultsHeader.innerHTML = `Showing all <span class='highlight'>${data.length}</span> approved ancestors`;
 
             // Sort the data alphabetically by surname
             const sortedData = data.sort(sortSurnameAsc);
@@ -324,45 +296,47 @@
             });
 
             // Start the actual visualization
-            const dataVis = d3.select("#datavis");
-            makeChart(statList);
+            //const dataVis = d3.select("#datavis");
+           // makeChart(statList);
 
         }
 
-        function makeChart(data) {
 
-            // Create an empty (detached) chart container.
-            const div = d3.create("div");
-            
-            // Apply some styles to the chart container.
-            div.style("font", "10px sans-serif");
-            div.style("text-align", "right");
-            div.style("color", "white");
-            
-            // Define the initial (empty) selection for the bars.
-            const bar = div.selectAll("div");
-            
-            // Bind this selection to the data (computing enter, update and exit).
-            const barUpdate = bar.data(data);
-            
-            // Join the selection and the data, appending the entering bars.
-            const barNew = barUpdate.join("div");
-            
-            // Apply some styles to the bars.
-            barNew.style("background", "steelblue");
-            barNew.style("padding", "3px");
-            barNew.style("margin", "1px");
-            
-            // Set the width as a function of data.
-            barNew.style("width", d => `${d * 10}px`);
-            
-            // Set the text of each bar as the data.
-            barNew.text(d => d);
-            
-            // Return the chart container.
-            return div.node();
+        //---------------------------------------
+        //  COUNTDOWN CLOCK
+        //---------------------------------------
 
-        }
+        // Set the date we're counting down to
+        const cdDate = new Date("Aug 15, 2021 12:00:00");
+        const countDownDate = cdDate.getTime();
+
+
+        // Update the count down every 1 second
+        const x = setInterval(function() {
+
+            // Get today's date and time
+            const now = new Date().getTime();
+
+            // Find the distance between now and the count down date
+            const distance = countDownDate - now;
+
+            // Time calculations for days, hours, minutes and seconds
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Display the result in the element with id="demo"
+            document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
+            + minutes + "m " + seconds + "s ";
+            document.getElementById("countdown").setAttribute('title', cdDate);
+
+            // If the count down is finished, write some text
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("countdown").innerHTML += "PASSED!";
+            }
+        }, 1000);
 
 
         //---------------------------------------

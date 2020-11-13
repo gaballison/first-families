@@ -10,14 +10,19 @@
         border: solid 2px $primary;
         border-radius: 5px;
         font-size: 1.2em;
+
+        &:active {
+            border: solid 2px $tertiary;
+        }
     }
 
     label {
-        display: block;
+        // display: block;
         font-family: $font-stack-headings;
         font-size: 1.2em;
         font-weight: 500;
-        color: $primary;
+        color: $grey-2;
+        padding-right: 5px;
     }
 }
 
@@ -25,32 +30,45 @@ table {
     // color: dimgrey;
     font-size: 1.1em;
     border-collapse: collapse;
-    background-color: $grey-3;
+    background-color: $muted;
 }
 
 th {
     font-weight: bold;
     color: $text;
     text-align: left;
-    background-color: $grey-2;
+    background-color: $th;
     font-family: $font-stack-headings;
 }
 
 th, td {
     padding: 0.5em 1em 0.5em 0.5em;
-    border: solid 1px $grey-2;
+    border: solid 1px $th;
     margin: 0;
 }
 
 .sort {
     padding-left: 0.5em;
-    color: $bg;
+    color: $ternary;
 }
 
 .sort:hover {
-    color: $linkhover;
+    color: $link;
 }
 
 .sort:active {
     color: $text;
+}
+
+.highlight {
+    color: $primary;
+}
+
+#resultsHeader {
+    margin-top: 1em;
+}
+
+#results {
+    margin: 0 auto;
+
 }

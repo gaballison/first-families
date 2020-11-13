@@ -346,45 +346,46 @@ body {
   line-height: 1.9;
   font-size: 16px;
   font-weight: 400;
-  color: #F8F9FA;
-  background-color: #212529;
+  color: #495057;
+  background-color: #CAD2C5;
 }
 
 a {
   text-decoration: none;
-  color: RGBA(34, 87, 122, 1);
+  color: #ED4D6E;
   font-weight: 600;
 }
 
 a:hover {
-  color: RGBA(164, 80, 139, 1);
+  color: #DB6C79;
 }
 
 h1, h2, h3, h4, h5 {
   font-family: "Montserrat", sans-serif;
   font-weight: 600;
   line-height: 1.2;
-  color: #E55812;
+  color: #6C757D;
 }
 
 main {
   padding: 0.5em;
 }
 
-#top-nav {
+#main-nav {
   overflow: hidden;
-  background-color: #40E0D0;
-  color: #F8F9FA;
+  background-color: #a5a5a5;
+  color: #EBEBEB;
   font-size: 1.2em;
   font-weight: 600;
   font-family: "Montserrat", sans-serif;
+  margin-bottom: 1em;
 }
 
 #nav-list {
   list-style-type: none;
   display: flex;
   flex-flow: row wrap;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-content: center;
   align-items: center;
   margin: 0;
@@ -395,37 +396,24 @@ main {
   margin-left: 0;
 }
 #nav-list li a {
-  color: RGBA(255, 255, 255, 1);
+  color: #52489C;
   display: block;
   padding: 1em;
 }
 #nav-list li a:hover {
-  color: #E55812;
+  color: #ED4D6E;
 }
 
-#year-list, #county-list {
-  display: none;
-}
-#year-list li, #county-list li {
-  list-style-type: none;
-  margin-right: 1em;
-  margin-left: 0;
-}
-#year-list li a, #county-list li a {
-  color: RGBA(255, 255, 255, 1);
-  display: block;
-  padding: 1em;
-}
-#year-list li a:hover, #county-list li a:hover {
-  background-color: #E55812;
+#countdown {
+  color: #DB6C79;
 }
 
 #searchFilter select {
   font-weight: 600;
   padding: 1em;
-  background-color: #40E0D0;
+  background-color: #a5a5a5;
   border: 0;
-  color: #212529;
+  color: #52489C;
 }
 
 .show {
@@ -439,50 +427,65 @@ main {
 }
 #mainSearch input {
   padding: 1em;
-  background-color: RGBA(220, 220, 220, 1);
-  border: solid 2px #40E0D0;
+  background-color: #EBEBEB;
+  border: solid 2px #52489C;
   border-radius: 5px;
   font-size: 1.2em;
 }
+#mainSearch input:active {
+  border: solid 2px #ED4D6E;
+}
 #mainSearch label {
-  display: block;
   font-family: "Montserrat", sans-serif;
   font-size: 1.2em;
   font-weight: 500;
-  color: #40E0D0;
+  color: #495057;
+  padding-right: 5px;
 }
 
 table {
   font-size: 1.1em;
   border-collapse: collapse;
-  background-color: #6C757D;
+  background-color: #EBEBEB;
 }
 
 th {
   font-weight: bold;
-  color: #F8F9FA;
+  color: #495057;
   text-align: left;
-  background-color: #495057;
+  background-color: #a5a5a5;
   font-family: "Montserrat", sans-serif;
 }
 
 th, td {
   padding: 0.5em 1em 0.5em 0.5em;
-  border: solid 1px #495057;
+  border: solid 1px #a5a5a5;
   margin: 0;
 }
 
 .sort {
   padding-left: 0.5em;
-  color: #212529;
+  color: #DB6C79;
 }
 
 .sort:hover {
-  color: RGBA(164, 80, 139, 1);
+  color: #ED4D6E;
 }
 
 .sort:active {
-  color: #F8F9FA;
+  color: #495057;
+}
+
+.highlight {
+  color: #52489C;
+}
+
+#resultsHeader {
+  margin-top: 1em;
+}
+
+#results {
+  margin: 0 auto;
 }
 
 /*# sourceMappingURL=style.css.map */
