@@ -476,7 +476,7 @@ header h2.subtitle {
 }
 #mainSearch input {
   padding: 1em;
-  background-color: #EBEBEB;
+  background-color: RGBA(255, 255, 255, 1);
   border: solid 2px #274C77;
   font-size: 1.2em;
 }

@@ -277,6 +277,10 @@ document.addEventListener('DOMContentLoaded', () => {
         return county;
     }
 
+    // Update copyright year in footer
+    const rightNow = new Date();
+    document.getElementById('copyright').innerHTML = ` <strong>${rightNow.getFullYear()} &nbsp; &middot;</strong>`;
+
 
     //---------------------------------------
     //  DATA FOR VISUALIZATIONS
