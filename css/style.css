@@ -347,12 +347,12 @@ body {
   font-size: 16px;
   font-weight: 400;
   color: #495057;
-  background-color: #CAD2C5;
+  background-color: #EFEFF0;
 }
 
 a {
   text-decoration: none;
-  color: #ED4D6E;
+  color: #2E8B57;
   font-weight: 600;
 }
 
@@ -378,7 +378,7 @@ main {
 }
 #main-nav {
   overflow: hidden;
-  background-color: #9a9a9a;
+  background-color: #aeaeae;
   color: #EBEBEB;
   font-size: 1.2em;
   font-weight: 600;
@@ -402,24 +402,24 @@ main {
   margin-left: 0;
 }
 #nav-list li a {
-  color: #52489C;
+  color: #274C77;
   display: block;
   padding: 1em;
 }
 #nav-list li a:hover {
-  color: #ED4D6E;
+  color: #2E8B57;
 }
 
 #countdown {
-  color: #52489C;
+  color: #274C77;
 }
 
 #searchFilter select {
   font-weight: 600;
   padding: 1em;
-  background-color: #9a9a9a;
+  background-color: #aeaeae;
   border: 0;
-  color: #52489C;
+  color: #274C77;
 }
 
 .show {
@@ -477,11 +477,11 @@ header h2.subtitle {
 #mainSearch input {
   padding: 1em;
   background-color: #EBEBEB;
-  border: solid 2px #52489C;
+  border: solid 2px #274C77;
   font-size: 1.2em;
 }
 #mainSearch input:active {
-  border: solid 2px #ED4D6E;
+  border: solid 2px #2E8B57;
 }
 #mainSearch label {
   display: block;
@@ -517,7 +517,7 @@ header h2.subtitle {
   font-size: 1.2em;
 }
 .stat span strong {
-  color: #52489C;
+  color: #274C77;
 }
 
 .stat-county {
@@ -542,24 +542,24 @@ table {
 }
 
 tr:nth-of-type(even) {
-  background: #bfbfbf;
+  background: #dbdbdb;
 }
 
 tr:hover {
-  background-color: #bde7e7;
+  background-color: #9ddfba;
 }
 
 th {
   font-weight: bold;
   color: #495057;
   text-align: left;
-  background-color: #9a9a9a;
+  background-color: #aeaeae;
   font-family: "Montserrat", sans-serif;
 }
 
 th, td {
   padding: 0.5em 1em 0.5em 0.5em;
-  border: solid 1px #9a9a9a;
+  border: solid 1px #aeaeae;
   margin: 0;
 }
 
@@ -569,7 +569,7 @@ th, td {
 }
 
 .sort:hover {
-  color: #ED4D6E;
+  color: #2E8B57;
 }
 
 .sort:active {
@@ -577,7 +577,7 @@ th, td {
 }
 
 .highlight {
-  color: #52489C;
+  color: #274C77;
 }
 
 #resultsHeader {
@@ -607,6 +607,16 @@ footer ul li {
 @media only screen and (max-width: 600px) {
   header h1 {
     font-size: 30px;
+  }
+
+  .stat-county {
+    width: 100px;
+  }
+  .stat-county h2 {
+    font-size: 20px;
+  }
+  .stat-county span {
+    font-size: 1em;
   }
 }
 @media only screen and (max-width: 800px) {
