@@ -1,13 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     //---------------------------------------
-    //  MODULES
-    //---------------------------------------
-    //import * as d3 from "d3.mjs";
-    //const d3 = require('d3');
-
-
-    //---------------------------------------
     //  GLOBAL VARIABLES
     //---------------------------------------
     let html = document.getElementById('results');
@@ -17,17 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let current_page = 1;
     let rows = 10;
     let yearTotals = {};
-    let countyTotals =  {
-        'Total': 0,
-        'Floyd': 0,
-        'Clark': 0,
-        'Harrison': 0
-    }
+    let countyTotals =  { 'Total': 0, 'Floyd': 0, 'Clark': 0, 'Harrison': 0 }
     const latestYear = 2019;
-    const counties = ['Floyd', 'Clark', 'Harrison'];
-    const viewYear = document.getElementById('view-year');
-    const viewCounty = document.getElementById('view-county');
-    const pagination = document.getElementById('pagination');
+    const pagination_element = document.getElementById('pagination');
     const navForm = document.getElementById('searchFilter');
     const mainSearch = document.getElementById('mainSearch');
 
@@ -48,6 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Build the table of initial data
             buildTable(data);
+            // displayData(data, html, rows, current_page);
+            // setupPagination(data, pagination_element, rows);
             dataList = data;
 
             // Generate the data for visualizations
@@ -105,6 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Start building the table
         beginTable();
+        statsDiv.innerHTML = '';
 
         // Split the input into individual words
         const words = name.split(" ");
@@ -120,14 +108,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (wLength > 1) {
 
                 if ( ancestor.surname.toUpperCase().includes(surname) || ancestor.maiden_name.toUpperCase().includes(surname) ) {
-                    console.log(`Yay, we have a surname match for ${surname}`);
 
                     const shortArray = words.slice(0,(wLength-1));
-                    console.log(`The new short array is ${shortArray}`);
 
                     shortArray.forEach(word => {
                         if (ancestor.first_name.toUpperCase().includes(word.toUpperCase()) || ancestor.middle_name.toUpperCase().includes(word.toUpperCase())) {
-                            console.log(`We have a match in the short array for ${word}`);
 
                             searchNames.push(ancestor);
                         }
@@ -162,6 +147,42 @@ document.addEventListener('DOMContentLoaded', () => {
     //---------------------------------------
     //  HELPER FUNCTIONS
     //---------------------------------------
+
+    function displayData (items, wrapper, rows_per_page, page) {
+        wrapper.innerHTML = `
+        <table id="main-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>County</th>
+                    <th>First Year</th>
+                    <th>Applicants</th>
+                </tr>
+            </thead>
+            <tbody>
+        `;
+    
+        // Sort the data alphabetically by surname
+        const sortedData = items.sort(sortSurnameAsc);
+        sortedData.forEach(obj => makeRows(obj));
+    
+        page--;
+    
+        let start = rows_per_page * page;
+        let end = start + rows_per_page;
+        let paginatedItems = items.slice(start, end);
+    
+        // Build the header to show how many results in total
+        resultsHeader.innerHTML = `Showing items <span class="highlight">${start} - ${end}</span> of <span class='highlight'>${items.length}</span> approved ancestors`;
+    
+        for (let i = 0; i < paginatedItems.length; i++) {
+            let item = paginatedItems[i]; // object
+            makeRows(item);
+        }
+
+        // Close out the table
+        html.innerHTML += `</tbody></table>`;
+    }
 
     function beginTable() {
         // Start building the table
@@ -215,7 +236,6 @@ document.addEventListener('DOMContentLoaded', () => {
         row += `<td>${object['total_applicants']}</td>`;
 
         row += `</tr>`;
-        //console.log(`row = ${row}`);
         
         newRow.innerHTML = row;
     }
@@ -275,7 +295,6 @@ document.addEventListener('DOMContentLoaded', () => {
             dataList.forEach(person => {
                 if (person[year] > 0) {
                     if (person.first_added === parseInt(year)) {
-                        // console.log(`${person.first_name} ${person.surname} first added in ${year}`);
                         switch(person.primary_county) {
                             case 'Floyd':
                                 yearTotals[year].new_floyd++;
@@ -302,7 +321,6 @@ document.addEventListener('DOMContentLoaded', () => {
                                 break;
                         }
                     } else {
-                        // console.log(`${person.first_name} ${person.surname} was used in ${year} but was first added in ${person.first_added}`);
                         switch(person.primary_county) {
                             case 'Floyd':
                                 yearTotals[year].existing_floyd++;
@@ -329,41 +347,6 @@ document.addEventListener('DOMContentLoaded', () => {
         
     }
 
-    function makeChart(data) {
-
-        // Create an empty (detached) chart container.
-        const div = d3.create("div");
-        
-        // Apply some styles to the chart container.
-        div.style("font", "10px sans-serif");
-        div.style("text-align", "right");
-        div.style("color", "white");
-        
-        // Define the initial (empty) selection for the bars.
-        const bar = div.selectAll("div");
-        
-        // Bind this selection to the data (computing enter, update and exit).
-        const barUpdate = bar.data(data);
-        
-        // Join the selection and the data, appending the entering bars.
-        const barNew = barUpdate.join("div");
-        
-        // Apply some styles to the bars.
-        barNew.style("background", "steelblue");
-        barNew.style("padding", "3px");
-        barNew.style("margin", "1px");
-        
-        // Set the width as a function of data.
-        barNew.style("width", d => `${d * 10}px`);
-        
-        // Set the text of each bar as the data.
-        barNew.text(d => d);
-        
-        // Return the chart container.
-        return div.node();
-
-    }
-
     /**
      * Function to generate the individual boxes containing total number of new and existing ancestors for a given year or county
      * @param {number} year - 4 digit year
@@ -374,7 +357,6 @@ document.addEventListener('DOMContentLoaded', () => {
         statsDiv.innerHTML = '';        
 
         if (year !== undefined && year <= latestYear && year > 2012) {
-            console.log(`Year is ${year} (type ${typeof year}) so we can fetch all of the data from the object at yearTotals[year]: ${yearTotals[year]}`);
             let data = yearTotals[year];
             let dummy = `
                     <div class="stat stat-county">
@@ -409,6 +391,7 @@ document.addEventListener('DOMContentLoaded', () => {
            let dummy = `
                 <div class="stat">
                     <h2>${countyTotals[county]}</h2>
+                    <span>total in</span>
                     <span>${county}</span>
                 </div>
             `;
@@ -501,7 +484,6 @@ document.addEventListener('DOMContentLoaded', () => {
     //  EVENT HANDLING
     //---------------------------------------
     navForm.addEventListener('change', event => {
-        console.log(`You changed ${event.target.id} to ${event.target.value}!`);
         // then we fetch the data matching that criteria and build a table with the results
         if (event.target.id === 'county') {
             filterData('county', event.target.value);
@@ -516,7 +498,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const searchTerm = document.getElementById('genericSearch').value;
         searchData(searchTerm);
     });
-
 
 
     //---------------------------------------
@@ -559,7 +540,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         button.addEventListener('click', function () {
             current_page = page;
-            displayList(items, list_element, rows, current_page);
+            displayData(items, html, rows, current_page);
 
             let current_btn = document.querySelector('.pagenumbers button.active');
             current_btn.classList.remove('active');
