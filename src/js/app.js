@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+// document.addEventListener('DOMContentLoaded', () => {
 
     //---------------------------------------
     //  GLOBAL VARIABLES
@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let resultsHeader = document.getElementById('resultsHeader');
     let statsDiv = document.getElementById('statsDiv');
     let current_page = 1;
-    let rows = 10;
+    let rows = 20;
     let yearTotals = {};
     let countyTotals =  { 'Total': 0, 'Floyd': 0, 'Clark': 0, 'Harrison': 0 }
     const latestYear = 2019;
@@ -32,9 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
 
             // Build the table of initial data
-            buildTable(data);
-            // displayData(data, html, rows, current_page);
-            // setupPagination(data, pagination_element, rows);
+            // buildTable(data);
+            displayData(data, html, rows, current_page);
+            setupPagination(data, pagination_element, rows);
             dataList = data;
 
             // Generate the data for visualizations
@@ -160,42 +160,6 @@ document.addEventListener('DOMContentLoaded', () => {
     //  HELPER FUNCTIONS
     //---------------------------------------
 
-    function displayData (items, wrapper, rows_per_page, page) {
-        wrapper.innerHTML = `
-        <table id="main-table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>County</th>
-                    <th>First Year</th>
-                    <th>Applicants</th>
-                </tr>
-            </thead>
-            <tbody>
-        `;
-    
-        // Sort the data alphabetically by surname
-        const sortedData = items.sort(sortSurnameAsc);
-        sortedData.forEach(obj => makeRows(obj));
-    
-        page--;
-    
-        let start = rows_per_page * page;
-        let end = start + rows_per_page;
-        let paginatedItems = items.slice(start, end);
-    
-        // Build the header to show how many results in total
-        resultsHeader.innerHTML = `Showing items <span class="highlight">${start} - ${end}</span> of <span class='highlight'>${items.length}</span> approved ancestors`;
-    
-        for (let i = 0; i < paginatedItems.length; i++) {
-            let item = paginatedItems[i]; // object
-            makeRows(item);
-        }
-
-        // Close out the table
-        html.innerHTML += `</tbody></table>`;
-    }
-
     function beginTable() {
         // Start building the table
         html.innerHTML = `
@@ -234,6 +198,28 @@ document.addEventListener('DOMContentLoaded', () => {
     function makeRows(object) {
         let table = document.getElementById("main-table").getElementsByTagName("tbody")[0];
         let newRow = table.insertRow();
+
+        // construct name
+        let row = `<td>${makeName(object)}</td>`;
+
+        // get county (or counties)
+        row += `<td>${makeCounty(object)}</td>`
+
+        // print first year someone joined through that ancestor
+        row += `<td>${object['first_added']}</td>`;
+
+        // print total # of people who joined through that ancestor
+        row += `<td>${object['total_applicants']}</td>`;
+
+        row += `</tr>`;
+        
+        newRow.innerHTML = row;
+    }
+
+    // in this version we are just going to create a <tr> element and RETURN it rather than adding it to the DOM
+    function getPageRows(object) {
+        // let table = document.getElementById("main-table").getElementsByTagName("tbody")[0];
+        // let newRow = table.insertRow();
 
         // construct name
         let row = `<td>${makeName(object)}</td>`;
@@ -519,23 +505,48 @@ document.addEventListener('DOMContentLoaded', () => {
     //---------------------------------------
     //  PAGINATION
     //---------------------------------------
-    function displayList (items, wrapper, rows_per_page, page) {
-        wrapper.innerHTML = "";
+    function displayData (items, wrapper, rows_per_page, page) {
+        wrapper.innerHTML = `
+        <table id="main-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>County</th>
+                    <th>First Year</th>
+                    <th>Applicants</th>
+                </tr>
+            </thead>
+            <tbody>
+        `;
+    
+        // Sort the data alphabetically by surname
+        const sortedData = items.sort(sortSurnameAsc);
+    
         page--;
-
+    
         let start = rows_per_page * page;
         let end = start + rows_per_page;
-        let paginatedItems = items.slice(start, end);
+        let paginatedItems = sortedData.slice(start, end);
+    
+        // Build the header to show how many results in total
+        let displayStart = start;
+        let displayEnd = end;
 
-        for (let i = 0; i < paginatedItems.length; i++) {
-            let item = paginatedItems[i];
-
-            let item_element = document.createElement('div');
-            item_element.classList.add('item');
-            item_element.innerText = item;
-            
-            wrapper.appendChild(item_element);
+        if (start === 0) {
+            displayStart = 1;
+        } else if (end > items.length) {
+            displayEnd = items.length;
         }
+
+        resultsHeader.innerHTML = `Showing items <span class="highlight">${displayStart} - ${displayEnd}</span> of <span class='highlight'>${items.length}</span> approved ancestors`;
+    
+        for (let i = 0; i < paginatedItems.length; i++) {
+            let item = paginatedItems[i]; // object
+            makeRows(item);
+        }
+
+        // Close out the table
+        html.innerHTML += `</tbody></table>`;
     }
 
     function setupPagination (items, wrapper, rows_per_page) {
@@ -567,9 +578,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return button;
     }
 
-    // DisplayList(list_items, list_element, rows, current_page);
-    // SetupPagination(list_items, pagination_element, rows);
-
     // source: https://github.com/TylerPottsDev/vanillajs-pagination/blob/master/main.js
 
-});
+// });
