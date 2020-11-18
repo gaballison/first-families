@@ -97,6 +97,24 @@ header {
     }
 }
 
+.error-msg {
+    max-width: 500px;
+    background-color: $error-light;
+    color: $error-dark;
+    border: solid 2px $error-dark;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 0 auto;
+
+    h2 {
+        color: $error-dark;
+    }
+}
+
+.error {
+    color: $error-dark;
+    font-weight: 600;
+}
 
 
 table {
@@ -153,7 +171,6 @@ th, td {
 
 #results {
     margin: 0 auto;
-
 }
 
 footer {
@@ -171,11 +188,6 @@ footer {
             list-style-type: none;
             margin-right: 1em;
             margin-left: 0;
-            
-            // &:first-of-type {
-            //     padding-right: 1em; 
-            //     border-right: solid 3px $grey-4;
-            // }
         }
     }
 }    
@@ -203,6 +215,9 @@ footer {
 
 @media only screen and (max-width: 800px) {
 
+    /*********************************************
+    * THIS BASIC CODE CAME FROM CSS-TRICKS.COM <3
+    *********************************************/
 
     /* Force table to not be like tables anymore */
 	table, thead, tbody, th, td, tr { 

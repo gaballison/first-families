@@ -39,6 +39,9 @@ $muted: #EBEBEB;
 $th: color.scale($bg, $blackness: 40%);
 $zebra: color.scale($bg, $blackness: 10%);
 
+$error-dark: #550C18;
+$error-light: #D5A086;
+
 
 /* BREAkPOINTS */
 $breakpoint-xxs-max: 325px;

@@ -90,8 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
         //fetchData();
         //console.dir(dataList);
 
-        // Start building the table
-        beginTable();
+        // Make sure we don't show unrelated stats
         statsDiv.innerHTML = '';
 
         // Split the input into individual words
@@ -130,17 +129,30 @@ document.addEventListener('DOMContentLoaded', () => {
             
         }
 
-        // Make sure we don't have any duplicates in the array
-        const uniqueAncestors = searchNames.filter((v,i,a)=>a.findIndex(t=>(t.ancestor_id === v.ancestor_id))===i);
+        // Only display data if we actually have results
+        if(searchNames.length > 0) {
 
-        // Update header to show number of results + search term
-        resultsHeader.innerHTML = `Showing all <span class='highlight'>${uniqueAncestors.length}</span> results for ${name}`;
+            // Start building the table
+            beginTable();
 
-        // Sort the array alphabetically and then print it
-        const sortedData = uniqueAncestors.sort(sortSurnameAsc);
-        sortedData.forEach(obj => makeRows(obj));
+            // Make sure we don't have any duplicates in the array
+            const uniqueAncestors = searchNames.filter((v,i,a)=>a.findIndex(t=>(t.ancestor_id === v.ancestor_id))===i);
 
-        html.innerHTML += `</tbody></table>`;
+            // Update header to show number of results + search term
+            resultsHeader.innerHTML = `Showing all <span class='highlight'>${uniqueAncestors.length}</span> results for ${name}`;
+
+            // Sort the array alphabetically and then print it
+            const sortedData = uniqueAncestors.sort(sortSurnameAsc);
+            sortedData.forEach(obj => makeRows(obj));
+
+            html.innerHTML += `</tbody></table>`;
+
+        } else {
+            resultsHeader.innerHTML = `<span class='error'>0</span> results found for <span class='highlight'>${name}</span>`;
+            html.innerHTML = `<div class='error-msg'><h2>Bummer!</h2> We couldn't find anyone with that name. Please try a different search.`;
+        };
+
+        
 
     }
 

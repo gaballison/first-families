@@ -534,6 +534,24 @@ header h2.subtitle {
   text-align: left;
 }
 
+.error-msg {
+  max-width: 500px;
+  background-color: #D5A086;
+  color: #550C18;
+  border: solid 2px #550C18;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 0 auto;
+}
+.error-msg h2 {
+  color: #550C18;
+}
+
+.error {
+  color: #550C18;
+  font-weight: 600;
+}
+
 table {
   width: 100%;
   font-size: 1.1em;
@@ -620,6 +638,9 @@ footer ul li {
   }
 }
 @media only screen and (max-width: 800px) {
+  /*********************************************
+  * THIS BASIC CODE CAME FROM CSS-TRICKS.COM <3
+  *********************************************/
   /* Force table to not be like tables anymore */
   table, thead, tbody, th, td, tr {
     display: block;
