@@ -2,7 +2,7 @@
   "name": "first-families",
   "version": "0.0.1",
   "description": "Web app to view data on existing First Families of Floyd, Clark, and Harrison Counties applications",
-  "main": "js/app.js",
+  "main": "src/js/app.js",
   "scripts": {
     "test": "mocha",
     "dev": "sass --watch src/scss:css"
