@@ -1,24 +1,30 @@
 // document.addEventListener('DOMContentLoaded', () => {
 
     //---------------------------------------
-    //  GLOBAL VARIABLES
+    //  00. GLOBAL VARIABLES 
     //---------------------------------------
+
+    // ***** SELECTORS ***** //
     let html = document.getElementById('results');
-    let dataList = [];
+    let pagination_element = document.getElementById('pagination');
+    let navForm = document.getElementById('searchFilter');
+    let mainSearch = document.getElementById('mainSearch');
     let resultsHeader = document.getElementById('resultsHeader');
     let statsDiv = document.getElementById('statsDiv');
-    let current_page = 1;
-    let rows = 20;
+
+    // ***** NEW ELEMENTS ***** //
+    let dataList = [];
     let yearTotals = {};
     let countyTotals =  { 'Total': 0, 'Floyd': 0, 'Clark': 0, 'Harrison': 0 }
-    const latestYear = 2019;
-    const pagination_element = document.getElementById('pagination');
-    const navForm = document.getElementById('searchFilter');
-    const mainSearch = document.getElementById('mainSearch');
+
+    // ***** GENERAL VARIABLES ***** //
+    let current_page = 1;
+    let rows = 20;
+    const latestYear = 2019; // setting manually because 2020 was cancelled
 
 
     //---------------------------------------
-    //  FETCH THE DATA
+    //  01. FETCH THE DATA INITIALLY
     //---------------------------------------
 
     // initial fetch of entire data
@@ -56,10 +62,17 @@
         
     }
 
+    //---------------------------------------
+    //  01. FETCH THE DATA INITIALLY
+    //---------------------------------------
+
     // filtering data
     function filterData(filter, value) {
         //fetchData();
-        beginTable();
+        // beginTable();
+
+        // Make sure we don't show unrelated stats
+        resetDOM();
 
         // return subset of data that only matches specified filter
         let filteredData = [];
@@ -76,7 +89,9 @@
         }
 
         const sortedData = filteredData.sort(sortSurnameAsc);
-        sortedData.forEach(obj => makeRows(obj));
+        // sortedData.forEach(obj => makeRows(obj));
+        displayData(sortedData, html, rows, current_page);
+        setupPagination(sortedData, pagination_element, rows);
         
         html.innerHTML += `</tbody></table>`;
     }
@@ -92,6 +107,7 @@
 
         // Make sure we don't show unrelated stats
         statsDiv.innerHTML = '';
+        pagination_element.innerHTML = '';
 
         // Split the input into individual words
         const words = name.split(" ");
@@ -139,7 +155,7 @@
             const uniqueAncestors = searchNames.filter((v,i,a)=>a.findIndex(t=>(t.ancestor_id === v.ancestor_id))===i);
 
             // Update header to show number of results + search term
-            resultsHeader.innerHTML = `Showing all <span class='highlight'>${uniqueAncestors.length}</span> results for ${name}`;
+            resultsHeader.innerHTML = `Showing all <span class='highlight'>${uniqueAncestors.length}</span> results for ${name}`;            
 
             // Sort the array alphabetically and then print it
             const sortedData = uniqueAncestors.sort(sortSurnameAsc);
@@ -151,8 +167,6 @@
             resultsHeader.innerHTML = `<span class='error'>0</span> results found for <span class='highlight'>${name}</span>`;
             html.innerHTML = `<div class='error-msg'><h2>Bummer!</h2> We couldn't find anyone with that name. Please try a different search.`;
         };
-
-        
 
     }
 
@@ -216,28 +230,6 @@
         newRow.innerHTML = row;
     }
 
-    // in this version we are just going to create a <tr> element and RETURN it rather than adding it to the DOM
-    function getPageRows(object) {
-        // let table = document.getElementById("main-table").getElementsByTagName("tbody")[0];
-        // let newRow = table.insertRow();
-
-        // construct name
-        let row = `<td>${makeName(object)}</td>`;
-
-        // get county (or counties)
-        row += `<td>${makeCounty(object)}</td>`
-
-        // print first year someone joined through that ancestor
-        row += `<td>${object['first_added']}</td>`;
-
-        // print total # of people who joined through that ancestor
-        row += `<td>${object['total_applicants']}</td>`;
-
-        row += `</tr>`;
-        
-        newRow.innerHTML = row;
-    }
-
     function makeName(object) {
         // returns name as string formatted as LAST, Title First Middle (Maiden) Suffix
         // e.g. ARMSTRONG, Captain John Andrew II or HARRIS, Jane Elizabeth (Jones)
@@ -273,6 +265,12 @@
         }
 
         return county;
+    }
+
+    function resetDOM() {
+        current_page = 1;
+        statsDiv.innerHTML = '';
+        pagination_element.innerHTML = '';
     }
 
     // Update copyright year in footer
@@ -486,6 +484,8 @@
     //  EVENT HANDLING
     //---------------------------------------
     navForm.addEventListener('change', event => {
+        resetDOM();
+
         // then we fetch the data matching that criteria and build a table with the results
         if (event.target.id === 'county') {
             filterData('county', event.target.value);
@@ -493,10 +493,12 @@
             filterData('year', event.target.value);
         }
         navForm.reset();
+        
     });
 
     mainSearch.addEventListener('submit', event => {
         event.preventDefault();
+        resetDOM();
         const searchTerm = document.getElementById('genericSearch').value;
         searchData(searchTerm);
     });
@@ -569,7 +571,7 @@
             current_page = page;
             displayData(items, html, rows, current_page);
 
-            let current_btn = document.querySelector('.pagenumbers button.active');
+            let current_btn = document.querySelector('.pagination button.active');
             current_btn.classList.remove('active');
 
             button.classList.add('active');

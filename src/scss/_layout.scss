@@ -21,14 +21,12 @@ header {
 #mainSearch {
     margin: 0 auto;
     text-align: center;
-    //background-color: $lavender;
     padding: 1em;
     
     input {
         padding: 1em;
         background-color: $white;
         border: solid 2px $primary;
-        //border-radius: 5px;
         font-size: 1.2em;
 
         &:active {
@@ -44,6 +42,37 @@ header {
         color: $grey-3;
         padding-right: 5px;
     }
+}
+
+// add button and .active classes
+.pagination {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    
+    button {
+        width: 50px;
+	    height: 50px;
+        padding: 10px;
+        background-color: $primary-muted;
+        border: solid 1px $primary;
+
+        margin: 10px 5px;
+	    transition: 0.4s;
+    
+        &:hover {
+            background-color: $ternary;
+        }
+
+    }
+}
+
+.active {
+    font-weight: bold;
+    box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.2);
+    border: solid 2px $secondary;
+    color: $white;
 }
 
 #statsDiv {

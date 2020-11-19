@@ -492,6 +492,32 @@ header h2.subtitle {
   padding-right: 5px;
 }
 
+.pagination {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+}
+.pagination button {
+  width: 50px;
+  height: 50px;
+  padding: 10px;
+  background-color: #457fc2;
+  border: solid 1px #274C77;
+  margin: 10px 5px;
+  transition: 0.4s;
+}
+.pagination button:hover {
+  background-color: #DB6C79;
+}
+
+.active {
+  font-weight: bold;
+  box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.2);
+  border: solid 2px #2E8B57;
+  color: RGBA(255, 255, 255, 1);
+}
+
 #statsDiv {
   display: flex;
   flex-flow: row wrap;
