@@ -1,0 +1,29 @@
+/***************
+*  SEARCH BOX  *
+***************/
+
+#mainSearch {
+    margin: 0 auto;
+    text-align: center;
+    padding: 1em;
+    
+    input {
+        padding: 1em;
+        background-color: $white;
+        border: solid 2px $primary;
+        font-size: 1.2em;
+
+        &:active {
+            border: solid 2px $tertiary;
+        }
+    }
+
+    label {
+        display: block;
+        font-family: $font-stack-headings;
+        font-size: 1.2em;
+        font-weight: 500;
+        color: $grey-3;
+        padding-right: 5px;
+    }
+}

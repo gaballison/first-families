@@ -1,11 +1,8 @@
 // first we reset things 
 @import "normalize";
 
-// then get modularscale for pretty typography --> https://github.com/modularscale/modularscale-sass
-// @import 'modularscale';
-
 // then we get the variables & set the base
 @import "variables", "base";
 
 // then we start actually doing shit
-@import "nav", "layout";
+@import "header", "nav", "searchbox", "table", "pagination", "footer";

@@ -1,17 +1,14 @@
+/**************
+*  VARIABLES  *
+**************/
+
 @use "sass:color";
 
 /* TYPOGRAPHY */
 $font-stack-headings: 'Montserrat', sans-serif;
 $font-stack-body: 'Lora', serif;
-// $font-stack-mono: "DM Mono", monospace;
 $line-height-body: 1.9;
 $line-height-headings: 1.2;
-
-// $modularscale: (
-//   base: 1em,
-//   ratio: 1.5
-// );
-// $leading: 1.6;
 
 /* DARK MODE COLORS */
 $black: RGBA(0, 0, 0, 1); // black
@@ -41,14 +38,3 @@ $zebra: color.scale($bg, $blackness: 10%);
 
 $error-dark: #550C18;
 $error-light: #D5A086;
-
-
-/* BREAkPOINTS */
-$breakpoint-xxs-max: 325px;
-$breakpoint-xs-min: 380px;
-$breakpoint-xs-max: 420px;
-$breakpoint-sm-min: 421px;
-$breakpoint-sm-max: 480px;
-$breakpoint-md-min: 481px;
-$breakpoint-md-max: 768px;
-$breakpoint-lg-min: 769px;

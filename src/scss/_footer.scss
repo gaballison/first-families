@@ -1,0 +1,21 @@
+/***********
+*  FOOTER  *
+***********/
+footer {
+    ul {
+        list-style-type: none;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+
+        li {
+            list-style-type: none;
+            margin-right: 1em;
+            margin-left: 0;
+        }
+    }
+} 

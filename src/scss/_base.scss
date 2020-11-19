@@ -1,3 +1,7 @@
+/****************
+*  BASE STYLES  *
+****************/
+
 body {
     margin: 0 auto;
     font-family: $font-stack-body;
@@ -27,7 +31,37 @@ h1, h2, h3, h4, h5 {
 
 main {
     padding: 1em;
-    
+}
+
+.error-msg {
+    max-width: 500px;
+    background-color: $error-light;
+    color: $error-dark;
+    border: solid 2px $error-dark;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 0 auto;
+
+    h2 {
+        color: $error-dark;
+    }
+}
+
+.error {
+    color: $error-dark;
+    font-weight: 600;
+}
+
+.highlight {
+    color: $primary;
+}
+
+#resultsHeader {
+    margin-top: 1em;
+}
+
+#results {
+    margin: 0 auto;
 }
 
 @media only screen and (max-width: 800px) {

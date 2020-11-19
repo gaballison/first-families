@@ -1,0 +1,93 @@
+/***************
+*  DATA TABLE  *
+***************/
+
+table {
+    width: 100%;
+    font-size: 1.1em;
+    border-collapse: collapse;
+    background-color: $muted;
+}
+
+tr:nth-of-type(even) { 
+    background: $zebra; 
+}
+
+tr:hover {
+    background-color: $secondary-muted;
+}
+
+th {
+    font-weight: bold;
+    color: $text;
+    text-align: left;
+    background-color: $th;
+    font-family: $font-stack-headings;
+}
+
+th, td {
+    padding: 0.5em 1em 0.5em 0.5em;
+    border: solid 1px $th;
+    margin: 0;
+}
+
+.sort {
+    padding-left: 0.5em;
+    color: $ternary;
+}
+
+.sort:hover {
+    color: $link;
+}
+
+.sort:active {
+    color: $text;
+}
+
+@media only screen and (max-width: 800px) {
+
+    /*********************************************
+    * THIS BASIC CODE CAME FROM CSS-TRICKS.COM <3
+    *********************************************/
+
+    /* Force table to not be like tables anymore */
+	table, thead, tbody, th, td, tr { 
+        display: block; 
+	}
+	
+	/* Hide table headers (but not display: none;, for accessibility) */
+	thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+    }
+
+    tr { border: 1px solid #ccc; }
+
+    td { 
+		/* Behave  like a "row" */
+		border: none;
+		border-bottom: 1px solid #fff; 
+		position: relative;
+		padding-left: 50%; 
+	}
+	
+	td:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+	}
+	
+	/*
+	Label the data
+	*/
+	td:nth-of-type(1):before { content: "Name"; }
+	td:nth-of-type(2):before { content: "County"; }
+	td:nth-of-type(3):before { content: "First Added"; }
+	td:nth-of-type(4):before { content: "Total Applicants"; }
+}

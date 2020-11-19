@@ -337,9 +337,14 @@ template {
   display: none;
 }
 
+/**************
+*  VARIABLES  *
+**************/
 /* TYPOGRAPHY */
 /* DARK MODE COLORS */
-/* BREAkPOINTS */
+/****************
+*  BASE STYLES  *
+****************/
 body {
   margin: 0 auto;
   font-family: "Lora", serif;
@@ -371,86 +376,44 @@ main {
   padding: 1em;
 }
 
+.error-msg {
+  max-width: 500px;
+  background-color: #D5A086;
+  color: #550C18;
+  border: solid 2px #550C18;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 0 auto;
+}
+.error-msg h2 {
+  color: #550C18;
+}
+
+.error {
+  color: #550C18;
+  font-weight: 600;
+}
+
+.highlight {
+  color: #274C77;
+}
+
+#resultsHeader {
+  margin-top: 1em;
+}
+
+#results {
+  margin: 0 auto;
+}
+
 @media only screen and (max-width: 800px) {
   main {
     padding: 0.2em;
   }
 }
-#main-nav {
-  overflow: hidden;
-  background-color: #aeaeae;
-  color: #EBEBEB;
-  font-size: 1.2em;
-  font-weight: 600;
-  font-family: "Montserrat", sans-serif;
-  margin-bottom: 1em;
-}
-
-#nav-list {
-  list-style-type: none;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-  align-content: center;
-  align-items: center;
-  margin: 0;
-  padding: 0;
-}
-#nav-list li {
-  list-style-type: none;
-  margin-right: 1em;
-  margin-left: 0;
-}
-#nav-list li a {
-  color: #274C77;
-  display: block;
-  padding: 1em;
-}
-#nav-list li a:hover {
-  color: #2E8B57;
-}
-
-#countdown {
-  color: #274C77;
-}
-
-#searchFilter select {
-  font-weight: 600;
-  padding: 1em;
-  background-color: #aeaeae;
-  border: 0;
-  color: #274C77;
-}
-
-.show {
-  display: inherit;
-}
-
-@media only screen and (max-width: 800px) {
-  #main-nav {
-    font-size: 0.9em;
-  }
-
-  #nav-list {
-    width: 100%;
-    flex-flow: row wrap;
-    justify-content: center;
-    align-items: flex-start;
-    text-align: left;
-  }
-  #nav-list li {
-    margin-left: 5px;
-    display: inline-block;
-  }
-  #nav-list li a {
-    padding: 0.5em;
-  }
-
-  #searchFilter select {
-    padding: 0.5em;
-    display: inline-block;
-  }
-}
+/***********
+*  HEADER  *
+***********/
 header {
   display: flex;
   flex-flow: row wrap;
@@ -467,55 +430,6 @@ header h2.subtitle {
   font-family: "Lora", serif;
   text-align: center;
   margin-top: 0;
-}
-
-#mainSearch {
-  margin: 0 auto;
-  text-align: center;
-  padding: 1em;
-}
-#mainSearch input {
-  padding: 1em;
-  background-color: RGBA(255, 255, 255, 1);
-  border: solid 2px #274C77;
-  font-size: 1.2em;
-}
-#mainSearch input:active {
-  border: solid 2px #2E8B57;
-}
-#mainSearch label {
-  display: block;
-  font-family: "Montserrat", sans-serif;
-  font-size: 1.2em;
-  font-weight: 500;
-  color: #6C757D;
-  padding-right: 5px;
-}
-
-.pagination {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  align-items: center;
-}
-.pagination button {
-  width: 50px;
-  height: 50px;
-  padding: 10px;
-  background-color: #457fc2;
-  border: solid 1px #274C77;
-  margin: 10px 5px;
-  transition: 0.4s;
-}
-.pagination button:hover {
-  background-color: #DB6C79;
-}
-
-.active {
-  font-weight: bold;
-  box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.2);
-  border: solid 2px #2E8B57;
-  color: RGBA(255, 255, 255, 1);
 }
 
 #statsDiv {
@@ -560,24 +474,124 @@ header h2.subtitle {
   text-align: left;
 }
 
-.error-msg {
-  max-width: 500px;
-  background-color: #D5A086;
-  color: #550C18;
-  border: solid 2px #550C18;
-  border-radius: 5px;
-  padding: 10px;
-  margin: 0 auto;
-}
-.error-msg h2 {
-  color: #550C18;
-}
+@media only screen and (max-width: 600px) {
+  header h1 {
+    font-size: 30px;
+  }
 
-.error {
-  color: #550C18;
+  .stat-county {
+    width: 100px;
+  }
+  .stat-county h2 {
+    font-size: 20px;
+  }
+  .stat-county span {
+    font-size: 1em;
+  }
+}
+/*******************
+*  NAVIGATION BAR  *
+*******************/
+#main-nav {
+  overflow: hidden;
+  background-color: #aeaeae;
+  color: #EBEBEB;
+  font-size: 1.2em;
   font-weight: 600;
+  font-family: "Montserrat", sans-serif;
+  margin-bottom: 1em;
 }
 
+#nav-list {
+  list-style-type: none;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+#nav-list li {
+  list-style-type: none;
+  margin-right: 1em;
+  margin-left: 0;
+}
+#nav-list li a {
+  color: #274C77;
+  display: block;
+  padding: 1em;
+}
+#nav-list li a:hover {
+  color: #2E8B57;
+}
+
+#countdown {
+  color: #2E8B57;
+}
+
+#searchFilter select {
+  font-weight: 600;
+  padding: 1em;
+  background-color: #aeaeae;
+  border: 0;
+  color: #274C77;
+}
+
+@media only screen and (max-width: 800px) {
+  #main-nav {
+    font-size: 0.9em;
+  }
+
+  #nav-list {
+    width: 100%;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: left;
+  }
+  #nav-list li {
+    margin-left: 5px;
+    display: inline-block;
+  }
+  #nav-list li a {
+    padding: 0.5em;
+  }
+
+  #searchFilter select {
+    padding: 0.5em;
+    display: inline-block;
+  }
+}
+/***************
+*  SEARCH BOX  *
+***************/
+#mainSearch {
+  margin: 0 auto;
+  text-align: center;
+  padding: 1em;
+}
+#mainSearch input {
+  padding: 1em;
+  background-color: RGBA(255, 255, 255, 1);
+  border: solid 2px #274C77;
+  font-size: 1.2em;
+}
+#mainSearch input:active {
+  border: solid 2px #2E8B57;
+}
+#mainSearch label {
+  display: block;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.2em;
+  font-weight: 500;
+  color: #6C757D;
+  padding-right: 5px;
+}
+
+/***************
+*  DATA TABLE  *
+***************/
 table {
   width: 100%;
   font-size: 1.1em;
@@ -620,49 +634,6 @@ th, td {
   color: #495057;
 }
 
-.highlight {
-  color: #274C77;
-}
-
-#resultsHeader {
-  margin-top: 1em;
-}
-
-#results {
-  margin: 0 auto;
-}
-
-footer ul {
-  list-style-type: none;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  align-content: center;
-  align-items: center;
-  margin: 0;
-  padding: 0;
-}
-footer ul li {
-  list-style-type: none;
-  margin-right: 1em;
-  margin-left: 0;
-}
-
-@media only screen and (max-width: 600px) {
-  header h1 {
-    font-size: 30px;
-  }
-
-  .stat-county {
-    width: 100px;
-  }
-  .stat-county h2 {
-    font-size: 20px;
-  }
-  .stat-county span {
-    font-size: 1em;
-  }
-}
 @media only screen and (max-width: 800px) {
   /*********************************************
   * THIS BASIC CODE CAME FROM CSS-TRICKS.COM <3
@@ -720,6 +691,53 @@ footer ul li {
   td:nth-of-type(4):before {
     content: "Total Applicants";
   }
+}
+/***************
+*  PAGINATION  *
+***************/
+.pagination {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+}
+.pagination button {
+  width: 50px;
+  height: 50px;
+  padding: 10px;
+  background-color: #457fc2;
+  border: solid 1px #274C77;
+  margin: 10px 5px;
+  transition: 0.4s;
+}
+.pagination button:hover {
+  background-color: #DB6C79;
+}
+
+.active {
+  font-weight: bold;
+  box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.2);
+  border: solid 2px #2E8B57;
+  color: RGBA(255, 255, 255, 1);
+}
+
+/***********
+*  FOOTER  *
+***********/
+footer ul {
+  list-style-type: none;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+footer ul li {
+  list-style-type: none;
+  margin-right: 1em;
+  margin-left: 0;
 }
 
 /*# sourceMappingURL=style.css.map */
