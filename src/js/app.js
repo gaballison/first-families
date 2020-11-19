@@ -45,20 +45,8 @@ fetch('./data/FFAncestors.json')
     });
 
 
-function fetchData(dataFunction) {
-    fetch('./data/FFAncestors.json')
-    .then(function(response) {
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json();
-    })
-    .then(data => dataFunction(data));
-    
-}
-
 //---------------------------------------
-//  03. RETURN SUBSETS OF INITIAL DATA
+//  02. RETURN SUBSETS OF INITIAL DATA
 //---------------------------------------
 
 /**
@@ -161,7 +149,7 @@ function searchData(name) {
 }
 
 //---------------------------------------
-//  04. HELPER FUNCTIONS
+//  03. HELPER FUNCTIONS
 //---------------------------------------
 
 /**
@@ -285,7 +273,7 @@ document.getElementById('copyright').innerHTML = ` <strong>${rightNow.getFullYea
 
 
 //---------------------------------------
-//  05. DATA FOR VISUALIZATIONS
+//  04. DATA FOR VISUALIZATIONS
 //---------------------------------------
 
 /**
@@ -437,7 +425,7 @@ function makeStatsDiv(flag, value) {
 
 
 //---------------------------------------
-//  06. COUNTDOWN CLOCK
+//  05. COUNTDOWN CLOCK
 //---------------------------------------
 
 // Set the date we're counting down to
@@ -473,7 +461,7 @@ const x = setInterval(function() {
 
 
 //---------------------------------------
-//  07. SORTING FUNCTIONS
+//  06. SORTING FUNCTIONS
 //---------------------------------------
 function sortSurnameAsc(a, b) {
     if ( a.surname < b.surname ){
@@ -487,7 +475,7 @@ function sortSurnameAsc(a, b) {
 
 
 //---------------------------------------
-//  08. EVENT HANDLING
+//  07. EVENT HANDLING
 //---------------------------------------
 navForm.addEventListener('change', event => {
     resetDOM();
@@ -511,7 +499,7 @@ mainSearch.addEventListener('submit', event => {
 
 
 //---------------------------------------
-//  09. PAGINATION
+//  08. PAGINATION
 //  source: https://github.com/TylerPottsDev/vanillajs-pagination/
 //---------------------------------------
 
